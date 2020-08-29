@@ -6,7 +6,7 @@
 	export let color = '#00ff00'
 	export let valueX = null
 	export let valueY = null
-	export let dimensionX = 'hue'
+	export let dimensionX = 'lightness'
 	export let dimensionY = 'saturation'
 	export let detailX = 100
 	export let detailY = 100
@@ -32,7 +32,7 @@
 	}
 
 	$: sliderPosX = cWidth * (valueX - dimX.extents[0]) / (dimX.extents[1] - dimX.extents[0])
-	$: sliderPosY = cHeight * (valueY - dimY.extents[0]) / (dimY.extents[1] - dimY.extents[0])
+	$: sliderPosY = cHeight - cHeight * (valueY - dimY.extents[0]) / (dimY.extents[1] - dimY.extents[0])
 
 	$: {
 		if (ctx) {
@@ -49,7 +49,7 @@
 				for (let y = 0; y < dY; y++) {
 					const colX = dimX.setValue(color, x / detailX * rangeX + dimX.extents[0])
 					ctx.fillStyle = dimY.setValue(colX, y / detailY * rangeY + dimY.extents[0])
-					ctx.fillRect(x * xStep, y * yStep, xStep, yStep)
+					ctx.fillRect(x * xStep, cHeight - y * yStep, xStep, yStep)
 				}
 			}
 
@@ -64,7 +64,7 @@
 	function onMouse(e) {
 		if (e.buttons === 1) {
 			let x = e.layerX - 1
-			let y = e.layerY - 1
+			let y = cHeight - e.layerY + 1
 
 			valueX = Math.round((x / cWidth) * (dimX.extents[1] - dimX.extents[0]) + dimX.extents[0])
 			valueY = Math.round((y / cHeight) * (dimY.extents[1] - dimY.extents[0]) + dimY.extents[0])
