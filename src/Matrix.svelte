@@ -54,10 +54,10 @@
 			}
 
 			ctx.fillStyle = '#ffffff'
-			ctx.fillRect(sliderPosX - 1, sliderPosY - 1, 3, 3)
+			ctx.fillRect(sliderPosX - 2, sliderPosY - 2, 5, 5)
 
 			ctx.fillStyle = '#000000'
-			ctx.fillRect(sliderPosX, sliderPosY, 1, 1)
+			ctx.fillRect(sliderPosX - 1, sliderPosY - 1, 3, 3)
 		}
 	}
 

@@ -58,7 +58,7 @@
 	bind:valueY={values[dimY]}
 	dimensionX={dimX}
 	dimensionY={dimY}
-	width="200"
+	width="310"
 	height="200"
 />
 
