@@ -34,10 +34,11 @@
 		if (ctx) {
 			ctx.clearRect(0, 0, cWidth, cHeight)
 
-			let xStep = cWidth / detail
+			let d = Math.min(detail, cWidth)
+			let xStep = cWidth / d
 			let range = dim.extents[1] - dim.extents[0]
-			for(let i = 0; i < detail; i++) {
-				ctx.fillStyle = dim.setValue(color, i / detail * range + dim.extents[0])
+			for(let i = 0; i < d; i++) {
+				ctx.fillStyle = dim.setValue(color, i / d * range + dim.extents[0])
 				ctx.fillRect(i * xStep, 0, xStep, cHeight)
 			}
 
