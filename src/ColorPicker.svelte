@@ -25,7 +25,7 @@
 
 	export let matrixWidth = 300
 	export let matrixHeight = 200
-	export let scrollbarHeight = 30
+	export let scrollbarHeight = 20
 
 	let dimX = null
 	let dimY = null
@@ -106,7 +106,7 @@
 	<div class="group">
 		<div class="text">
 			{#if showLabels}
-			<label for="hex">Hex:</label>
+			<label for="hex">Hex</label>
 			{/if}
 			<HexInput bind:color={color} width={textboxWidth} id="hex"/>
 		</div>
@@ -141,8 +141,9 @@
 	}
 
 	.text label {
-		padding: 0;
-		width: 50px;
+		padding: 0 5px 0 0;
+		width: 45px;
+		text-align: right;
 	}
 
 	input[type=radio] {
