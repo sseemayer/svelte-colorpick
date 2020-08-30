@@ -1,5 +1,5 @@
 <script>
-	import {default as ColorPicker, ScrollBar, Matrix, DimInput} from 'svelte-colorpick'
+	import {default as ColorPicker, ScrollBar, Matrix, DimInput, HexInput} from 'svelte-colorpick'
 
 	let color = '#ff9900'
 
@@ -46,7 +46,7 @@
 	bind:color={color}
 	dimensionX={dimX}
 	dimensionY={dimY}
-	width="310"
+	width="315"
 	height="200"
 />
 
@@ -63,25 +63,43 @@
 </div>
 {/each}
 
+<div class="slider-group">
+	<div class="text">
+		<label for="hex">Hex:</label>
+		<HexInput bind:color={color} id="hex"/>
+	</div>
+</div>
+
 
 <style>
 	.slider-group {
 		margin: 0 0 10px 0;
 	}
 
-	.slider {
+	.slider, .text {
 		display: flex;
 		align-items: center;
 	}
+
 	label {
-		display: inline-block;
-		margin: 0;
-		padding: 0 5px 0 0;
+		display: inline;
 		vertical-align: middle;
+		margin: 0;
+	}
+
+	.slider label {
+		padding: 0 5px 0 0;
 		width: 20px;
 	}
+
+	.text label {
+		padding: 0;
+		width: 50px;
+	}
+
 	input[type=radio] {
 		display: inline-block;
 		margin: 0 5px 0 0;
+		width: 20px;
 	}
 </style>
