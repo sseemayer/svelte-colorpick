@@ -27,7 +27,7 @@
 
 			matrixWidth: 300,
 			matrixHeight: 200,
-			scrollbarHeight: 30,
+			scrollbarHeight: 20,
 		},
 
 		hsl: {
@@ -51,7 +51,7 @@
 
 			matrixWidth: 300,
 			matrixHeight: 200,
-			scrollbarHeight: 30,
+			scrollbarHeight: 20,
 		},
 
 		mini: {

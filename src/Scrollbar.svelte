@@ -68,7 +68,9 @@
 		line-height: 0;
 	}
 
-	.scrollbar {
+	canvas {
 		border: 1px solid #000;
+		border-radius: 2px;
+		cursor: col-resize;
 	}
 </style>

@@ -62,8 +62,8 @@
 			let x = e.layerX - 1
 			let y = cHeight - e.layerY + 1
 
-			let vX = Math.round((x / cWidth) * (dimX.extents[1] - dimX.extents[0]) + dimX.extents[0])
-			let vY = Math.round((y / cHeight) * (dimY.extents[1] - dimY.extents[0]) + dimY.extents[0])
+			let vX = (x / cWidth) * (dimX.extents[1] - dimX.extents[0]) + dimX.extents[0]
+			let vY = (y / cHeight) * (dimY.extents[1] - dimY.extents[0]) + dimY.extents[0]
 
 			const colX = dimX.setValue(color, vX)
 			color = dimY.setValue(colX, vY).hex()
@@ -83,7 +83,9 @@
 		line-height: 0;
 	}
 
-	.matrix {
-		border: 1px solid #000;
+	canvas {
+		border: 1px solid #666;
+		border-radius: 5px;
+		cursor: crosshair;
 	}
 </style>
