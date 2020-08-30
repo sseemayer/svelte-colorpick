@@ -26,6 +26,7 @@
 
 	$: {
 		if (ctx) {
+			ctx.imageSmoothingEnabled = false
 			ctx.clearRect(0, 0, cWidth, cHeight)
 
 			let d = Math.min(detail, cWidth)

@@ -3,103 +3,155 @@
 
 	let color = '#ff9900'
 
-	let dimSel = 'hue'
-	let dimX = 'saturation'
-	let dimY = 'lightness'
+	let settings;
 
-	const dims = [
-		{
-			group: 'hsl',
-			dims: ['hue', 'saturation', 'lightness'],
+	let presets = {
+		full: {
+			showMatrix: true,
+			showSlidersGlobal: true,
+			showHex: true,
+			showNumeric: true,
+			showLabels: true,
+
+			showSliders: {
+				hue: true,
+				saturation: true,
+				lightness: true,
+
+				red: true,
+				green: true,
+				blue: true,
+			},
+
+			selectDimensions: true,
+
+			matrixWidth: 300,
+			matrixHeight: 200,
+			scrollbarHeight: 30,
 		},
-		{
-			group: 'rgb',
-			dims: ['red', 'green', 'blue'],
+
+		mini: {
+			showMatrix: true,
+			showSlidersGlobal: true,
+			showHex: false,
+			showNumeric: false,
+			showLabels: false,
+
+			showSliders: {
+				hue: true,
+				saturation: false,
+				lightness: false,
+
+				red: false,
+				green: false,
+				blue: false,
+			},
+
+			selectDimensions: false,
+
+			matrixWidth: 150,
+			matrixHeight: 150,
+			scrollbarHeight: 20,
 		},
-	]
-
-	$: {
-		if (dimSel === 'hue') {
-			dimX = 'saturation'
-			dimY = 'lightness'
-		} else if (dimSel === 'saturation') {
-			dimX = 'hue'
-			dimY = 'lightness'
-		} else if (dimSel === 'lightness') {
-			dimX = 'hue'
-			dimY = 'saturation'
-		} else if (dimSel === 'red') {
-			dimX = 'green'
-			dimY = 'blue'
-		} else if (dimSel === 'green') {
-			dimX = 'red'
-			dimY = 'blue'
-		} else if (dimSel === 'blue') {
-			dimX = 'red'
-			dimY = 'green'
-		}
-
 	}
+
+	function applyPreset (name) {
+		settings = JSON.parse(JSON.stringify(presets[name]))
+	}
+
+	applyPreset('full')
+
 </script>
 
-<Matrix
+<ColorPicker
 	bind:color={color}
-	dimensionX={dimX}
-	dimensionY={dimY}
-	width="315"
-	height="200"
+	showMatrix={settings.showMatrix}
+	showSliders={settings.showSlidersGlobal && settings.showSliders}
+	showHex={settings.showHex}
+	showLabels={settings.showLabels}
+	showNumeric={settings.showNumeric}
+	selectDimensions={settings.selectDimensions}
+
+	matrixWidth={settings.matrixWidth}
+	matrixHeight={settings.matrixHeight}
+	scrollbarHeight={settings.scrollbarHeight}
 />
 
-{#each dims as dimGroup}
-<div class="slider-group">
-	{#each dimGroup.dims as dim}
-		<div class="slider">
-			<input type="radio" bind:group={dimSel} value={dim} id={dim}>
-			<label for={dim}>{dim.substr(0, 1).toUpperCase()}</label>
-			<ScrollBar width="200" height="30" dimension={dim} bind:color={color}/>
-			<DimInput bind:color={color} dimension={dim}/>
-		</div>
-	{/each}
-</div>
-{/each}
+<div class='settings-panel'>
+	<h2>Settings</h2>
 
-<div class="slider-group">
-	<div class="text">
-		<label for="hex">Hex:</label>
-		<HexInput bind:color={color} id="hex"/>
+	<div>
+		<input id='showMatrix' type='checkbox' bind:checked={settings.showMatrix}/>
+		<label for='showMatrix'>showMatrix</label>
 	</div>
+	<div>
+		<input id='showSliders' type='checkbox' bind:checked={settings.showSlidersGlobal}/>
+		<label for='showSliders'>showSliders</label>
+	</div>
+	{#if settings.showSlidersGlobal}
+		{#each Object.keys(settings.showSliders) as dim}
+			<div class="indent">
+				<input id='showSliders-{dim}' type='checkbox' bind:checked={settings.showSliders[dim]}/>
+				<label for='showSliders-{dim}'>{dim}</label>
+			</div>
+		{/each}
+	{/if}
+	<div>
+		<input id='showHex' type='checkbox' bind:checked={settings.showHex}/>
+		<label for='showHex'>showHex</label>
+	</div>
+	<div>
+		<input id='showLabels' type='checkbox' bind:checked={settings.showLabels}/>
+		<label for='showLabels'>showLabels</label>
+	</div>
+	<div>
+		<input id='showNumeric' type='checkbox' bind:checked={settings.showNumeric}/>
+		<label for='showNumeric'>showNumeric</label>
+	</div>
+
+	<div>
+		<input id='selectDimensions' type='checkbox' bind:checked={settings.selectDimensions}/>
+		<label for='selectDimensions'>selectDimensions</label>
+	</div>
+	
+	<div>
+		<label for='matrixWidth'>matrix</label>
+		<input id='matrixWidth' type='number' min=100 max=600 bind:value={settings.matrixWidth}/>x
+		<input id='matrixHeight' type='number' min=100 max=600 bind:value={settings.matrixHeight}/>
+	</div>
+
+	<div>
+		<label for='scrollbarHeight'>scroll</label>
+		<input id='scrollbarHeight' type='number' min=10 max=100 bind:value={settings.scrollbarHeight}/>
+	</div>
+
+
+	<h3>Presets</h3>
+	{#each Object.keys(presets) as preset}
+		<button on:click={() => applyPreset(preset)}>{preset}</button>
+	{/each}
+
 </div>
 
 
 <style>
-	.slider-group {
-		margin: 0 0 10px 0;
+	.settings-panel {
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		width: 300px;
 	}
 
-	.slider, .text {
-		display: flex;
-		align-items: center;
+	.indent {
+		margin-left: 30px;
 	}
 
-	label {
-		display: inline;
-		vertical-align: middle;
-		margin: 0;
-	}
-
-	.slider label {
-		padding: 0 5px 0 0;
-		width: 20px;
-	}
-
-	.text label {
-		padding: 0;
-		width: 50px;
-	}
-
-	input[type=radio] {
+	input[type=checkbox], label {
 		display: inline-block;
-		margin: 0 5px 0 0;
-		width: 20px;
+	}
+
+	#matrixWidth, #matrixHeight, #scrollbarHeight {
+		width: 80px;
 	}
 </style>
