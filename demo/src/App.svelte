@@ -2,6 +2,7 @@
 	import ColorPicker from 'svelte-colorpick'
 
 	let color = '#ff9900'
+	let collapse = false
 
 	let settings;
 
@@ -75,7 +76,7 @@
 
 			matrixWidth: 150,
 			matrixHeight: 150,
-			scrollbarHeight: 20,
+			scrollbarHeight: 10,
 		},
 	}
 
@@ -92,6 +93,9 @@
 <div class="demo">
 	<ColorPicker
 		bind:color={color}
+
+		collapse={collapse}
+
 		showMatrix={settings.showMatrix}
 		showSliders={settings.showSlidersGlobal && settings.showSliders}
 		showHex={settings.showHex}
@@ -106,8 +110,12 @@
 </div>
 
 <div class='settings-panel'>
+	<h2>Mode</h2>
+	<div>
+		<input id='collapse' type='checkbox' bind:checked={collapse}/>
+		<label for='collapse'>collapse</label>
+	</div>
 	<h2>Settings</h2>
-
 	<div>
 		<input id='showMatrix' type='checkbox' bind:checked={settings.showMatrix}/>
 		<label for='showMatrix'>showMatrix</label>
@@ -141,7 +149,7 @@
 		<input id='selectDimensions' type='checkbox' bind:checked={settings.selectDimensions}/>
 		<label for='selectDimensions'>selectDimensions</label>
 	</div>
-	
+
 	<div>
 		<label for='matrixWidth'>matrix</label>
 		<input id='matrixWidth' type='number' min=100 max=600 bind:value={settings.matrixWidth}/>x
@@ -169,6 +177,7 @@
 		box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
 		border-radius: 5px;
 		padding: 5px;
+		line-height: 0;
 	}
 
 	.settings-panel {
