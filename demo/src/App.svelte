@@ -87,19 +87,23 @@
 
 </script>
 
-<ColorPicker
-	bind:color={color}
-	showMatrix={settings.showMatrix}
-	showSliders={settings.showSlidersGlobal && settings.showSliders}
-	showHex={settings.showHex}
-	showLabels={settings.showLabels}
-	showNumeric={settings.showNumeric}
-	selectDimensions={settings.selectDimensions}
+<h1>svelte-colorpick</h1>
 
-	matrixWidth={settings.matrixWidth}
-	matrixHeight={settings.matrixHeight}
-	scrollbarHeight={settings.scrollbarHeight}
-/>
+<div class="demo">
+	<ColorPicker
+		bind:color={color}
+		showMatrix={settings.showMatrix}
+		showSliders={settings.showSlidersGlobal && settings.showSliders}
+		showHex={settings.showHex}
+		showLabels={settings.showLabels}
+		showNumeric={settings.showNumeric}
+		selectDimensions={settings.selectDimensions}
+
+		matrixWidth={settings.matrixWidth}
+		matrixHeight={settings.matrixHeight}
+		scrollbarHeight={settings.scrollbarHeight}
+	/>
+</div>
 
 <div class='settings-panel'>
 	<h2>Settings</h2>
@@ -159,6 +163,14 @@
 
 
 <style>
+	.demo {
+		background: #fff;
+		display: inline-block;
+		box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
+		border-radius: 5px;
+		padding: 5px;
+	}
+
 	.settings-panel {
 		position: absolute;
 		right: 0;

@@ -65,7 +65,6 @@
 
 	$: sliderWidth = matrixWidth - (selectDimensions ? 25 : 0) - (showLabels ? 25 : 0) - (showNumeric ? 65 : 0)
 	$: textboxWidth = matrixWidth - (showLabels ? 50 : 0)
-
 </script>
 
 <div class='color-picker'>
@@ -81,7 +80,7 @@
 
 	{#if showSliders}
 	{#each dims as dimGroup}
-	<div class="slider-group">
+	<div class="group">
 		{#each dimGroup.dims as dim}
 			{#if showSliders[dim]}
 			<div class="slider">
@@ -104,7 +103,7 @@
 	{/if}
 
 	{#if showHex}
-	<div class="slider-group">
+	<div class="group">
 		<div class="text">
 			{#if showLabels}
 			<label for="hex">Hex:</label>
@@ -117,8 +116,12 @@
 
 
 <style>
-	.slider-group {
-		margin: 0 0 5px 0;
+	.color-picker {
+		display: inline-block;
+	}
+
+	.group {
+		margin: 5px 0 0 0;
 	}
 
 	.slider, .text {
