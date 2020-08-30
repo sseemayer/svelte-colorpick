@@ -1,5 +1,5 @@
 <script>
-	import {default as ColorPicker, ScrollBar, Matrix} from 'svelte-colorpick'
+	import {default as ColorPicker, ScrollBar, Matrix, DimInput} from 'svelte-colorpick'
 
 	let color = '#ff9900'
 
@@ -69,7 +69,7 @@
 			<input type="radio" bind:group={dimSel} value={dim} id={dim}>
 			<label for={dim}>{dim.substr(0, 1).toUpperCase()}</label>
 			<ScrollBar width="200" height="30" dimension={dim} bind:color={color} bind:value={values[dim]}/>
-			<input type="number" bind:value={values[dim]}>
+			<DimInput bind:color={color} dimension={dim} bind:value={values[dim]}/>
 		</div>
 	{/each}
 </div>

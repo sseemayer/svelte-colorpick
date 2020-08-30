@@ -16,7 +16,6 @@
 	let cWidth
 	let cHeight
 
-	
 	onMount(() => {
 		ctx = canvas.getContext('2d')
 	})
@@ -24,11 +23,10 @@
 	$: dim = dimensions[dimension]
 
 	$: {
-		value = Math.round(dim.getValue(color))
+		value = dim.getValue(color)
 	}
 
 	$: sliderPos = cWidth * (value - dim.extents[0]) / (dim.extents[1] - dim.extents[0])
-	
 
 	$: {
 		if (ctx) {
@@ -54,7 +52,7 @@
 		if (e.buttons === 1) {
 			let x = e.layerX - 1
 
-			value = Math.round((x / cWidth) * (dim.extents[1] - dim.extents[0]) + dim.extents[0])
+			value = (x / cWidth) * (dim.extents[1] - dim.extents[0]) + dim.extents[0]
 
 			color = dim.setValue(color, value).hex()
 		}
