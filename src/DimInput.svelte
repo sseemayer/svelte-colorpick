@@ -2,7 +2,7 @@
 	import dimensions from './dimensions'
 
 	export let color = '#00ff00'
-	export let dimension = 'hue'
+	export let dimension = 'hslH'
 
 	$: dim = dimensions[dimension]
 	$: value = dim.getValue(color)

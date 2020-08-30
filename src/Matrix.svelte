@@ -4,8 +4,8 @@
 	import dimensions from './dimensions'
 
 	export let color = '#00ff00'
-	export let dimensionX = 'lightness'
-	export let dimensionY = 'saturation'
+	export let dimensionX = 'hslL'
+	export let dimensionY = 'hslS'
 	export let detailX = 100
 	export let detailY = 100
 

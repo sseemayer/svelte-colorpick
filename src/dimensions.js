@@ -3,7 +3,7 @@ import chroma from 'chroma-js'
 let dimensions = {}
 let lastHue = null
 
-const keysHsl = ['hue', 'saturation', 'lightness']
+const keysHsl = ['hslH', 'hslS', 'hslL']
 for (let i = 0; i < keysHsl.length; i++) {
 	const k = keysHsl[i]
 	const scale = i === 0 ? 1 : 100
@@ -25,7 +25,7 @@ for (let i = 0; i < keysHsl.length; i++) {
 	}
 }
 
-const keysRgb = ['red', 'green', 'blue']
+const keysRgb = ['rgbR', 'rgbG', 'rgbB']
 for (let i = 0; i < keysRgb.length; i++) {
 	const k = keysRgb[i]
 	dimensions[k] = {

@@ -5,7 +5,7 @@
 	import HexInput from './HexInput.svelte'
 
 	export let color = '#ff9900'
-	export let selectedDimension = 'hue'
+	export let selectedDimension = 'hslH'
 
 	export let collapse = false
 	export let handleWidth = 32
@@ -13,13 +13,13 @@
 
 	export let showMatrix = true
 	export let showSliders = {
-		hue: true,
-		saturation: true,
-		lightness: true,
+		hslH: true,
+		hslS: true,
+		hslL: true,
 
-		red: true,
-		green: true,
-		blue: true,
+		rgbR: true,
+		rgbG: true,
+		rgbB: true,
 	}
 	export let showHex = true
 	export let showNumeric = true
@@ -39,33 +39,33 @@
 	const dims = [
 		{
 			group: 'hsl',
-			dims: ['hue', 'saturation', 'lightness'],
+			dims: ['hslH', 'hslS', 'hslL'],
 		},
 		{
 			group: 'rgb',
-			dims: ['red', 'green', 'blue'],
+			dims: ['rgbR', 'rgbG', 'rgbB'],
 		},
 	]
 
 	$: {
-		if (selectedDimension === 'hue') {
-			dimX = 'saturation'
-			dimY = 'lightness'
-		} else if (selectedDimension === 'saturation') {
-			dimX = 'hue'
-			dimY = 'lightness'
-		} else if (selectedDimension === 'lightness') {
-			dimX = 'hue'
-			dimY = 'saturation'
-		} else if (selectedDimension === 'red') {
-			dimX = 'green'
-			dimY = 'blue'
-		} else if (selectedDimension === 'green') {
-			dimX = 'red'
-			dimY = 'blue'
-		} else if (selectedDimension === 'blue') {
-			dimX = 'red'
-			dimY = 'green'
+		if (selectedDimension === 'hslH') {
+			dimX = 'hslS'
+			dimY = 'hslL'
+		} else if (selectedDimension === 'hslS') {
+			dimX = 'hslH'
+			dimY = 'hslL'
+		} else if (selectedDimension === 'hslL') {
+			dimX = 'hslH'
+			dimY = 'hslS'
+		} else if (selectedDimension === 'rgbR') {
+			dimX = 'rgbG'
+			dimY = 'rgbB'
+		} else if (selectedDimension === 'rgbG') {
+			dimX = 'rgbR'
+			dimY = 'rgbB'
+		} else if (selectedDimension === 'rgbB') {
+			dimX = 'rgbR'
+			dimY = 'rgbG'
 		}
 	}
 
@@ -105,7 +105,7 @@
 						<input type="radio" bind:group={selectedDimension} value={dim} id={dim}>
 					{/if}
 					{#if showLabels}
-						<label for={dim}>{dim.substr(0, 1).toUpperCase()}</label>
+						<label for={dim}>{dim.substr(3, 1).toUpperCase()}</label>
 					{/if}
 					<ScrollBar width={sliderWidth} height={scrollbarHeight} dimension={dim} bind:color={color}/>
 

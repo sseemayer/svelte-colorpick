@@ -15,13 +15,13 @@
 			showLabels: true,
 
 			showSliders: {
-				hue: true,
-				saturation: true,
-				lightness: true,
+				hslH: true,
+				hslS: true,
+				hslL: true,
 
-				red: true,
-				green: true,
-				blue: true,
+				rgbR: true,
+				rgbG: true,
+				rgbB: true,
 			},
 
 			selectDimensions: true,
@@ -39,13 +39,13 @@
 			showLabels: true,
 
 			showSliders: {
-				hue: true,
-				saturation: true,
-				lightness: true,
+				hslH: true,
+				hslS: true,
+				hslL: true,
 
-				red: false,
-				green: false,
-				blue: false,
+				rgbR: false,
+				rgbG: false,
+				rgbB: false,
 			},
 
 			selectDimensions: true,
@@ -63,13 +63,13 @@
 			showLabels: false,
 
 			showSliders: {
-				hue: true,
-				saturation: false,
-				lightness: false,
+				hslH: false,
+				hslS: false,
+				hslL: false,
 
-				red: false,
-				green: false,
-				blue: false,
+				rgbR: false,
+				rgbG: false,
+				rgbB: false,
 			},
 
 			selectDimensions: false,
