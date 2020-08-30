@@ -1,5 +1,5 @@
 <script>
-	import {default as ColorPicker, ScrollBar, Matrix, DimInput, HexInput} from 'svelte-colorpick'
+	import ColorPicker from 'svelte-colorpick'
 
 	let color = '#ff9900'
 
@@ -21,6 +21,30 @@
 				red: true,
 				green: true,
 				blue: true,
+			},
+
+			selectDimensions: true,
+
+			matrixWidth: 300,
+			matrixHeight: 200,
+			scrollbarHeight: 30,
+		},
+
+		hsl: {
+			showMatrix: true,
+			showSlidersGlobal: true,
+			showHex: true,
+			showNumeric: true,
+			showLabels: true,
+
+			showSliders: {
+				hue: true,
+				saturation: true,
+				lightness: true,
+
+				red: false,
+				green: false,
+				blue: false,
 			},
 
 			selectDimensions: true,
