@@ -41,11 +41,11 @@
 			let yStep = cHeight / dY
 			let rangeX = dimX.extents[1] - dimX.extents[0]
 			let rangeY = dimY.extents[1] - dimY.extents[0]
-			for(let x = 0; x < dX; x++) {
-				for (let y = 0; y < dY; y++) {
-					const colX = dimX.setValue(color, x / detailX * rangeX + dimX.extents[0])
-					ctx.fillStyle = dimY.setValue(colX, y / detailY * rangeY + dimY.extents[0])
-					ctx.fillRect(x * xStep, cHeight - y * yStep, xStep, yStep)
+			for (let y = 0; y < dY; y++) {
+				const colY = dimY.setValue(color, y / detailY * rangeY + dimY.extents[0])
+				for(let x = 0; x < dX; x++) {
+					ctx.fillStyle = dimX.setValue(colY, x / detailX * rangeX + dimX.extents[0])
+					ctx.fillRect(x * xStep, cHeight - y * yStep - 2, xStep, yStep)
 				}
 			}
 

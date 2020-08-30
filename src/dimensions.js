@@ -21,7 +21,7 @@ for (let i = 0; i < keysHsl.length; i++) {
 			colorHsl[i] = value / scale
 			return chroma.hsl(...colorHsl)
 		},
-		extents: [0, i === 0 ? 360 : 100]
+		extents: [0, i === 0 ? 359 : 100]
 	}
 }
 

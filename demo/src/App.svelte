@@ -84,11 +84,4 @@
 		display: inline-block;
 		margin: 0 5px 0 0;
 	}
-	input[type=number] {
-		display: inline-block;
-		margin: 0 0 0 5px;
-		padding: 5px 0 5px 5px;
-		width: 60px;
-		height: 30px;
-	}
 </style>
