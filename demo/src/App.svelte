@@ -3,16 +3,6 @@
 
 	let color = '#ff9900'
 
-	let values = {
-		hue: null,
-		saturation: null,
-		lightness: null,
-
-		red: null,
-		green: null,
-		blue: null,
-	}
-
 	let dimSel = 'hue'
 	let dimX = 'saturation'
 	let dimY = 'lightness'
@@ -54,8 +44,6 @@
 
 <Matrix
 	bind:color={color}
-	bind:valueX={values[dimX]}
-	bind:valueY={values[dimY]}
 	dimensionX={dimX}
 	dimensionY={dimY}
 	width="310"
@@ -68,8 +56,8 @@
 		<div class="slider">
 			<input type="radio" bind:group={dimSel} value={dim} id={dim}>
 			<label for={dim}>{dim.substr(0, 1).toUpperCase()}</label>
-			<ScrollBar width="200" height="30" dimension={dim} bind:color={color} bind:value={values[dim]}/>
-			<DimInput bind:color={color} dimension={dim} bind:value={values[dim]}/>
+			<ScrollBar width="200" height="30" dimension={dim} bind:color={color}/>
+			<DimInput bind:color={color} dimension={dim}/>
 		</div>
 	{/each}
 </div>

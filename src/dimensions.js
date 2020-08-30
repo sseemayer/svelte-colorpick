@@ -1,6 +1,7 @@
 import chroma from 'chroma-js'
 
 let dimensions = {}
+let lastHue = null
 
 const keysHsl = ['hue', 'saturation', 'lightness']
 for (let i = 0; i < keysHsl.length; i++) {
@@ -12,6 +13,11 @@ for (let i = 0; i < keysHsl.length; i++) {
 		},
 		setValue (color, value) {
 			let colorHsl = chroma(color).hsl()
+			if (isNaN(colorHsl[0])) {
+				colorHsl[0] = lastHue
+			} else {
+				lastHue = colorHsl[0]
+			}
 			colorHsl[i] = value / scale
 			return chroma.hsl(...colorHsl)
 		},

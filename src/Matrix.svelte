@@ -4,8 +4,6 @@
 	import dimensions from './dimensions'
 
 	export let color = '#00ff00'
-	export let valueX = null
-	export let valueY = null
 	export let dimensionX = 'lightness'
 	export let dimensionY = 'saturation'
 	export let detailX = 100
@@ -26,10 +24,8 @@
 	$: dimX = dimensions[dimensionX]
 	$: dimY = dimensions[dimensionY]
 
-	$: {
-		valueX = Math.round(dimX.getValue(color))
-		valueY = Math.round(dimY.getValue(color))
-	}
+	$: valueX = Math.round(dimX.getValue(color))
+	$: valueY = Math.round(dimY.getValue(color))
 
 	$: sliderPosX = cWidth * (valueX - dimX.extents[0]) / (dimX.extents[1] - dimX.extents[0])
 	$: sliderPosY = cHeight - cHeight * (valueY - dimY.extents[0]) / (dimY.extents[1] - dimY.extents[0])
@@ -66,11 +62,11 @@
 			let x = e.layerX - 1
 			let y = cHeight - e.layerY + 1
 
-			valueX = Math.round((x / cWidth) * (dimX.extents[1] - dimX.extents[0]) + dimX.extents[0])
-			valueY = Math.round((y / cHeight) * (dimY.extents[1] - dimY.extents[0]) + dimY.extents[0])
+			let vX = Math.round((x / cWidth) * (dimX.extents[1] - dimX.extents[0]) + dimX.extents[0])
+			let vY = Math.round((y / cHeight) * (dimY.extents[1] - dimY.extents[0]) + dimY.extents[0])
 
-			const colX = dimX.setValue(color, valueX)
-			color = dimY.setValue(colX, valueY).hex()
+			const colX = dimX.setValue(color, vX)
+			color = dimY.setValue(colX, vY).hex()
 		}
 	}
 </script>

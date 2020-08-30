@@ -4,7 +4,6 @@
 	import dimensions from './dimensions'
 
 	export let color = '#00ff00'
-	export let value = null
 	export let dimension = 'hue'
 	export let detail = 100
 
@@ -22,10 +21,7 @@
 
 	$: dim = dimensions[dimension]
 
-	$: {
-		value = dim.getValue(color)
-	}
-
+	$: value = dim.getValue(color)
 	$: sliderPos = cWidth * (value - dim.extents[0]) / (dim.extents[1] - dim.extents[0])
 
 	$: {
@@ -52,9 +48,9 @@
 		if (e.buttons === 1) {
 			let x = e.layerX - 1
 
-			value = (x / cWidth) * (dim.extents[1] - dim.extents[0]) + dim.extents[0]
+			let v = (x / cWidth) * (dim.extents[1] - dim.extents[0]) + dim.extents[0]
 
-			color = dim.setValue(color, value).hex()
+			color = dim.setValue(color, v).hex()
 		}
 	}
 </script>
