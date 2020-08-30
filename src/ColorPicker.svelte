@@ -17,6 +17,10 @@
 		hslS: true,
 		hslL: true,
 
+		hclH: true,
+		hclC: true,
+		hclL: true,
+
 		rgbR: true,
 		rgbG: true,
 		rgbB: true,
@@ -42,6 +46,10 @@
 			dims: ['hslH', 'hslS', 'hslL'],
 		},
 		{
+			group: 'hcl',
+			dims: ['hclH', 'hclC', 'hclL'],
+		},
+		{
 			group: 'rgb',
 			dims: ['rgbR', 'rgbG', 'rgbB'],
 		},
@@ -57,6 +65,15 @@
 		} else if (selectedDimension === 'hslL') {
 			dimX = 'hslH'
 			dimY = 'hslS'
+		} else if (selectedDimension === 'hclH') {
+			dimX = 'hclC'
+			dimY = 'hclL'
+		} else if (selectedDimension === 'hclC') {
+			dimX = 'hclH'
+			dimY = 'hclL'
+		} else if (selectedDimension === 'hclL') {
+			dimX = 'hclH'
+			dimY = 'hclC'
 		} else if (selectedDimension === 'rgbR') {
 			dimX = 'rgbG'
 			dimY = 'rgbB'

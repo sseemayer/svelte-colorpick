@@ -25,6 +25,28 @@ for (let i = 0; i < keysHsl.length; i++) {
 	}
 }
 
+const keysHcl = ['hclH', 'hclC', 'hclL']
+for (let i = 0; i < keysHcl.length; i++) {
+	const k = keysHcl[i]
+	const scale = 1;
+	dimensions[k] = {
+		getValue (color) {
+			return chroma(color).hcl()[i] * scale || 0
+		},
+		setValue (color, value) {
+			let colorHcl = chroma(color).hcl()
+			if (isNaN(colorHcl[0])) {
+				colorHcl[0] = lastHue
+			} else {
+				lastHue = colorHcl[0]
+			}
+			colorHcl[i] = value / scale
+			return chroma.hcl(...colorHcl)
+		},
+		extents: [0, i === 0 ? 359 : 100]
+	}
+}
+
 const keysRgb = ['rgbR', 'rgbG', 'rgbB']
 for (let i = 0; i < keysRgb.length; i++) {
 	const k = keysRgb[i]

@@ -8,6 +8,8 @@
 
 	let presets = {
 		full: {
+			selectedDimension: 'hslH',
+
 			showMatrix: true,
 			showSlidersGlobal: true,
 			showHex: true,
@@ -18,6 +20,10 @@
 				hslH: true,
 				hslS: true,
 				hslL: true,
+
+				hclH: true,
+				hclC: true,
+				hclL: true,
 
 				rgbR: true,
 				rgbG: true,
@@ -32,6 +38,8 @@
 		},
 
 		hsl: {
+			selectedDimension: 'hslH',
+
 			showMatrix: true,
 			showSlidersGlobal: true,
 			showHex: true,
@@ -42,6 +50,10 @@
 				hslH: true,
 				hslS: true,
 				hslL: true,
+
+				hclH: false,
+				hclC: false,
+				hclL: false,
 
 				rgbR: false,
 				rgbG: false,
@@ -55,7 +67,69 @@
 			scrollbarHeight: 20,
 		},
 
-		mini: {
+		hcl: {
+			selectedDimension: 'hclH',
+
+			showMatrix: true,
+			showSlidersGlobal: true,
+			showHex: true,
+			showNumeric: true,
+			showLabels: true,
+
+			showSliders: {
+				hslH: false,
+				hslS: false,
+				hslL: false,
+
+				hclH: true,
+				hclC: true,
+				hclL: true,
+
+				rgbR: false,
+				rgbG: false,
+				rgbB: false,
+			},
+
+			selectDimensions: true,
+
+			matrixWidth: 300,
+			matrixHeight: 200,
+			scrollbarHeight: 20,
+		},
+
+		miniHsl: {
+			selectedDimension: 'hslH',
+
+			showMatrix: true,
+			showSlidersGlobal: true,
+			showHex: false,
+			showNumeric: false,
+			showLabels: false,
+
+			showSliders: {
+				hslH: true,
+				hslS: false,
+				hslL: false,
+
+				hclH: false,
+				hclC: false,
+				hclL: false,
+
+				rgbR: false,
+				rgbG: false,
+				rgbB: false,
+			},
+
+			selectDimensions: false,
+
+			matrixWidth: 150,
+			matrixHeight: 150,
+			scrollbarHeight: 10,
+		},
+
+		miniHcl: {
+			selectedDimension: 'hclH',
+
 			showMatrix: true,
 			showSlidersGlobal: true,
 			showHex: false,
@@ -66,6 +140,10 @@
 				hslH: false,
 				hslS: false,
 				hslL: false,
+
+				hclH: true,
+				hclC: false,
+				hclL: false,
 
 				rgbR: false,
 				rgbG: false,
@@ -95,6 +173,8 @@
 		bind:color={color}
 
 		collapse={collapse}
+
+	 	selectedDimension={settings.selectedDimension}
 
 		showMatrix={settings.showMatrix}
 		showSliders={settings.showSlidersGlobal && settings.showSliders}
