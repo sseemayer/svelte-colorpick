@@ -67,10 +67,15 @@
 	function onMouse(e) {
 		if (e.buttons === 1) {
 			let x = e.layerX - 1
-			let y = (cHeight - 2) - e.layerY
+			let y = (cHeight - 1) - e.layerY
 
 			let vX = (x / (cWidth - 2)) * (dimX.data.extent[1] - dimX.data.extent[0]) + dimX.data.extent[0]
+			if (vX > dimX.data.extent[1]) { vX = dimX.data.extent[1] }
+			if (vX < dimX.data.extent[0]) { vX = dimX.data.extent[0] }
+
 			let vY = (y / (cHeight - 2)) * (dimY.data.extent[1] - dimY.data.extent[0]) + dimY.data.extent[0]
+			if (vY > dimY.data.extent[1]) { vY = dimY.data.extent[1] }
+			if (vY < dimY.data.extent[0]) { vY = dimY.data.extent[0] }
 
 			const colY = color.alter(dimY.scale, dimY.dim, vY / dimY.data.scale)
 			color = colY.alter(dimX.scale, dimX.dim, vX / dimX.data.scale)
