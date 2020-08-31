@@ -1,26 +1,38 @@
 {
   "name": "svelte-colorpick",
+  "version": "0.1.0",
+
+  "author": {
+	"name": "Stefan Seemayer",
+	"email": "npm@semicolonsoftware.de",
+	"url": "https://stefan.seemayer.de"
+  },
+
+  "keywords": [
+    "svelte", "color", "picker", "colorpick"
+  ],
+
   "svelte": "src/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
+
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "npm run build"
   },
+
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^6.0.0",
     "rollup": "^1.20.0",
     "rollup-plugin-svelte": "^5.0.0",
     "svelte": "^3.0.0"
   },
-  "keywords": [
-    "svelte"
-  ],
+  "dependencies": {
+    "d3-color": "^2.0.0"
+  },
+
   "files": [
     "src",
     "dist"
-  ],
-  "dependencies": {
-    "d3-color": "^2.0.0"
-  }
+  ]
 }

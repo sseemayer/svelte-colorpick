@@ -1,6 +1,10 @@
 # svelte-colorpick
 
-![full](assets/full.png)![miniHsl](assets/miniHsl.png)![collapse](assets/collapse.png)
+[Demo](https://sseemayer.github.io/svelte-colorpick/) / [GitHub](https://github.com/sseemayer/svelte-colorpick) / [npm](https://npmjs.com/package/svelte-colorpick)
+
+-------
+
+![full](https://raw.githubusercontent.com/sseemayer/svelte-colorpick/master/assets/full.png)![miniHsl](https://raw.githubusercontent.com/sseemayer/svelte-colorpick/master/assets/miniHsl.png)![collapse](https://raw.githubusercontent.com/sseemayer/svelte-colorpick/master/assets/collapse.png)
 
 A full-featured color picker for [Svelte](https://svelte.dev). Only has one dependency: [d3-color](https://github.com/d3/d3-color).
 
