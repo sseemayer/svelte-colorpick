@@ -298,6 +298,10 @@
 		margin-left: 30px;
 	}
 
+	.dimension {
+		font-weight: bold;
+	}
+
 	input[type=checkbox], label {
 		display: inline-block;
 	}
