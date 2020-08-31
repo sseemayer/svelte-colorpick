@@ -1,5 +1,7 @@
 # svelte-colorpick
 
+![full](assets/full.png)![miniHsl](assets/miniHsl.png)![collapse](assets/collapse.png)
+
 A full-featured color picker for [Svelte](https://svelte.dev). Only has one dependency: [d3-color](https://github.com/d3/d3-color).
 
   * Select colors from Hex, RGB, HSL, HCL, LAB
