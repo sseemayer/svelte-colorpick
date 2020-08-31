@@ -1,5 +1,6 @@
 import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
+import commonJS from 'rollup-plugin-commonjs';
 import pkg from './package.json';
 
 const name = pkg.name
@@ -15,6 +16,9 @@ export default {
 	],
 	plugins: [
 		svelte(),
-		resolve()
+		resolve(),
+		commonJS({
+			include: 'node_modules/**'
+		}),
 	]
 };
