@@ -85,12 +85,18 @@
 		{/if}
 
 		{#if showSliders}
-		
+
 		{#if tabbed}
 		<div class="tab-bar">
 			{#each Object.keys(dimensions) as scale}
 				{#if Object.keys(dimensions[scale]).some((dim) => showSliders[`${scale}.${dim}`] ) }
-					<div class="tab {selectedTab === scale ? 'active' : ''}" on:click={() => selectedTab = scale}>{scale}</div>
+					<div
+						class="tab {selectedTab === scale ? 'active' : ''}"
+						on:click={() => {
+							selectedTab = scale
+							selectedDimension = `${scale}.${Object.keys(dimensions[scale])[0]}`
+						}}
+					>{scale}</div>
 				{/if}
 			{/each}
 		</div>
