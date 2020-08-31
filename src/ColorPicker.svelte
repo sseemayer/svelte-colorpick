@@ -1,6 +1,6 @@
 <script>
 	import Color from './color'
-	import { dimensions } from './dimensions.js'
+	import { dimensions, getDimension } from './dimensions.js'
 
 	import ScrollBar from './Scrollbar.svelte'
 	import Matrix from './Matrix.svelte'
@@ -9,30 +9,32 @@
 
 	export let color = Color.hex('#ff9900')
 
-	if (typeof color === 'string') {
-		color = Color.hex(color)
+	$: {
+			if (typeof color === 'string') {
+			color = Color.hex(color)
+		}
 	}
 
 	export let selectedDimension = 'hsl.h'
+	export let selectedTab = 'hsl'
 
 	export let collapse = false
+	export let tabbed = false
+
 	export let handleWidth = 32
 	export let handleHeight = 32
 
 	export let showMatrix = true
-	export let showSliders = {
-		"hsl.h": true,
-		"hsl.s": true,
-		"hsl.l": true,
+	export let showSliders = null
 
-		"hcl.h": true,
-		"hcl.c": true,
-		"hcl.l": true,
-
-		"rgb.r": true,
-		"rgb.g": true,
-		"rgb.b": true,
+	if (showSliders == null) {
+		for (const scale in dimensions) {
+			for (const dim in dimensions[scale]) {
+				showSliders[`${scale}.${dim}`] = true
+			}
+		}
 	}
+
 	export let showHex = true
 	export let showNumeric = true
 	export let showLabels = true
@@ -49,34 +51,11 @@
 	let dimY = null
 
 	$: {
-		if (selectedDimension === 'hsl.h') {
-			dimX = 'hsl.s'
-			dimY = 'hsl.l'
-		} else if (selectedDimension === 'hsl.s') {
-			dimX = 'hsl.h'
-			dimY = 'hsl.l'
-		} else if (selectedDimension === 'hsl.l') {
-			dimX = 'hsl.h'
-			dimY = 'hsl.s'
-		} else if (selectedDimension === 'hcl.h') {
-			dimX = 'hcl.c'
-			dimY = 'hcl.l'
-		} else if (selectedDimension === 'hcl.c') {
-			dimX = 'hcl.h'
-			dimY = 'hcl.l'
-		} else if (selectedDimension === 'hcl.l') {
-			dimX = 'hcl.h'
-			dimY = 'hcl.c'
-		} else if (selectedDimension === 'rgb.r') {
-			dimX = 'rgb.g'
-			dimY = 'rgb.b'
-		} else if (selectedDimension === 'rgb.g') {
-			dimX = 'rgb.r'
-			dimY = 'rgb.b'
-		} else if (selectedDimension === 'rgb.b') {
-			dimX = 'rgb.r'
-			dimY = 'rgb.g'
-		}
+		let [scale, dim] = selectedDimension.split('.', 2)
+		let dims = Object.keys(dimensions[scale])
+		dims.splice(dims.indexOf(dim), 1)
+		dimX = `${scale}.${dims[0]}`
+		dimY = `${scale}.${dims[1]}`
 	}
 
 	$: sliderWidth = matrixWidth - (selectDimensions ? 25 : 0) - (showLabels ? 25 : 0) - (showNumeric ? 65 : 0)
@@ -106,7 +85,19 @@
 		{/if}
 
 		{#if showSliders}
+		
+		{#if tabbed}
+		<div class="tab-bar">
+			{#each Object.keys(dimensions) as scale}
+				{#if Object.keys(dimensions[scale]).some((dim) => showSliders[`${scale}.${dim}`] ) }
+					<div class="tab {selectedTab === scale ? 'active' : ''}" on:click={() => selectedTab = scale}>{scale}</div>
+				{/if}
+			{/each}
+		</div>
+		{/if}
+
 		{#each Object.keys(dimensions) as scale}
+		{#if !tabbed || selectedTab === scale}
 		<div class="group">
 			{#each Object.keys(dimensions[scale]) as dim}
 				{#if showSliders[`${scale}.${dim}`]}
@@ -126,6 +117,7 @@
 				{/if}
 			{/each}
 		</div>
+		{/if}
 		{/each}
 		{/if}
 
@@ -178,6 +170,27 @@
 
 	.color-picker.collapse .color-picker-controls.collapsed {
 		display: none;
+	}
+
+	.tab-bar {
+		display: flex;
+		height: 30px;
+		line-height: 30px;
+	}
+
+	.tab {
+		margin: 0 5px;
+		padding: 0 3px;
+		color: #aaa;
+		border-bottom: 2px solid #aaa;
+		cursor: pointer;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+
+	.tab.active {
+		color: #333;
+		border-color: #333;
 	}
 
 	.group {

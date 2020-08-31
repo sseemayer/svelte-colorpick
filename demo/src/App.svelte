@@ -10,6 +10,9 @@
 		full: {
 			selectedDimension: 'hsl.h',
 
+			tabbed: true,
+			selectedTab: 'hsl',
+
 			showMatrix: true,
 			showSlidersGlobal: true,
 			showHex: true,
@@ -40,6 +43,9 @@
 		hsl: {
 			selectedDimension: 'hsl.h',
 
+			tabbed: false,
+			selectedTab: 'hsl',
+
 			showMatrix: true,
 			showSlidersGlobal: true,
 			showHex: true,
@@ -50,14 +56,6 @@
 				"hsl.h": true,
 				"hsl.s": true,
 				"hsl.l": true,
-
-				"hcl.h": false,
-				"hcl.c": false,
-				"hcl.l": false,
-
-				"rgb.r": false,
-				"rgb.g": false,
-				"rgb.b": false,
 			},
 
 			selectDimensions: true,
@@ -70,6 +68,9 @@
 		hcl: {
 			selectedDimension: 'hcl.h',
 
+			tabbed: false,
+			selectedTab: 'hcl',
+
 			showMatrix: true,
 			showSlidersGlobal: true,
 			showHex: true,
@@ -77,17 +78,9 @@
 			showLabels: true,
 
 			showSliders: {
-				"hsl.h": false,
-				"hsl.s": false,
-				"hsl.l": false,
-
 				"hcl.h": true,
 				"hcl.c": true,
 				"hcl.l": true,
-
-				"rgb.r": false,
-				"rgb.g": false,
-				"rgb.b": false,
 			},
 
 			selectDimensions: true,
@@ -100,6 +93,9 @@
 		miniHsl: {
 			selectedDimension: 'hsl.h',
 
+			tabbed: false,
+			selectedTab: 'hsl',
+
 			showMatrix: true,
 			showSlidersGlobal: true,
 			showHex: false,
@@ -108,16 +104,6 @@
 
 			showSliders: {
 				"hsl.h": true,
-				"hsl.s": false,
-				"hsl.l": false,
-
-				"hcl.h": false,
-				"hcl.c": false,
-				"hcl.l": false,
-
-				"rgb.r": false,
-				"rgb.g": false,
-				"rgb.b": false,
 			},
 
 			selectDimensions: false,
@@ -130,6 +116,9 @@
 		miniHcl: {
 			selectedDimension: 'hcl.h',
 
+			tabbed: false,
+			selectedTab: 'hcl',
+
 			showMatrix: true,
 			showSlidersGlobal: true,
 			showHex: false,
@@ -137,17 +126,7 @@
 			showLabels: false,
 
 			showSliders: {
-				"hsl.h": false,
-				"hsl.s": false,
-				"hsl.l": false,
-
 				"hcl.h": true,
-				"hcl.c": false,
-				"hcl.l": false,
-
-				"rgb.r": false,
-				"rgb.g": false,
-				"rgb.b": false,
 			},
 
 			selectDimensions: false,
@@ -173,6 +152,8 @@
 		bind:color={color}
 
 		collapse={collapse}
+		tabbed={settings.tabbed}
+		selectedTab={settings.selectedTab}
 
 		selectedDimension={settings.selectedDimension}
 
@@ -196,6 +177,10 @@
 		<label for='collapse'>collapse</label>
 	</div>
 	<h2>Settings</h2>
+	<div>
+		<input id='tabbed' type='checkbox' bind:checked={settings.tabbed}/>
+		<label for='tabbed'>tabbed</label>
+	</div>
 	<div>
 		<input id='showMatrix' type='checkbox' bind:checked={settings.showMatrix}/>
 		<label for='showMatrix'>showMatrix</label>
