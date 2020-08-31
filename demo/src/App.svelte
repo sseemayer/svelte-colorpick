@@ -205,14 +205,20 @@
 </div>
 
 <div class='settings-panel'>
-	<h2>Mode</h2>
+	<h3>Mode</h3>
 	<div>
 		<input id='collapse' type='checkbox' bind:checked={collapse}/>
 		<label for='collapse'>collapse</label>
 		<input id='handleWidth' type='number' min=10 max=100 bind:value={handleWidth}/>x
 		<input id='handleHeight' type='number' min=10 max=100 bind:value={handleHeight}/>
 	</div>
-	<h2>Settings</h2>
+
+	<h3>Presets</h3>
+	{#each Object.keys(presets) as preset}
+		<button on:click={() => applyPreset(preset)}>{preset}</button>
+	{/each}
+
+	<h3>Settings</h3>
 	<div>
 		<input id='showMatrix' type='checkbox' bind:checked={settings.showMatrix}/>
 		<label for='showMatrix'>showMatrix</label>
@@ -244,9 +250,9 @@
 			<div class="indent"><span class="dimension">{scale}</span>
 
 				{#each Object.keys(dimensions[scale]) as dim}
-					<div class="indent">
+					<div class="scale-dim">
 						<input id='showSliders-{scale}-{dim}' type='checkbox' bind:checked={settings.showSliders[`${scale}.${dim}`]}/>
-						<label for='showSliders-{scale}-{dim}'>{scale}.{dim}</label>
+						<label for='showSliders-{scale}-{dim}'>{dim}</label>
 					</div>
 				{/each}
 			</div>
@@ -264,12 +270,6 @@
 		<label for='scrollbarHeight'>scroll</label>
 		<input id='scrollbarHeight' type='number' min=10 max=100 bind:value={settings.scrollbarHeight}/>
 	</div>
-
-
-	<h3>Presets</h3>
-	{#each Object.keys(presets) as preset}
-		<button on:click={() => applyPreset(preset)}>{preset}</button>
-	{/each}
 
 </div>
 
@@ -298,6 +298,15 @@
 
 	.dimension {
 		font-weight: bold;
+		display: inline-block;
+		width: 40px;
+		padding-left: 20px;
+	}
+
+	.scale-dim {
+		display: inline-block;
+		width: 30px;
+		margin-right: 5px;
 	}
 
 	input[type=checkbox], label {
