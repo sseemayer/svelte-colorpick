@@ -31,3 +31,5 @@ jobs:
       with:
         # Build directory to deploy
         build_dir: demo/public/
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
