@@ -1,7 +1,6 @@
 <script>
 	import {default as ColorPicker, dimensions} from 'svelte-colorpick'
 
-
 	let color = '#ff9900'
 	let collapse = false
 
