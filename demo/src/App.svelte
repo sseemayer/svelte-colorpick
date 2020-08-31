@@ -214,18 +214,32 @@
 	</div>
 	<h2>Settings</h2>
 	<div>
-		<input id='tabbed' type='checkbox' bind:checked={settings.tabbed}/>
-		<label for='tabbed'>tabbed</label>
-	</div>
-	<div>
 		<input id='showMatrix' type='checkbox' bind:checked={settings.showMatrix}/>
 		<label for='showMatrix'>showMatrix</label>
+		<input id='matrixWidth' type='number' min=100 max=600 bind:value={settings.matrixWidth}/>x
+		<input id='matrixHeight' type='number' min=100 max=600 bind:value={settings.matrixHeight}/>
 	</div>
 	<div>
 		<input id='showSliders' type='checkbox' bind:checked={settings.showSlidersGlobal}/>
 		<label for='showSliders'>showSliders</label>
 	</div>
 	{#if settings.showSlidersGlobal}
+		<div class="indent">
+			<input id='tabbed' type='checkbox' bind:checked={settings.tabbed}/>
+			<label for='tabbed'>tabbed</label>
+		</div>
+
+		<div class="indent">
+			<input id='showNumeric' type='checkbox' bind:checked={settings.showNumeric}/>
+			<label for='showNumeric'>showNumeric</label>
+		</div>
+
+		<div class="indent">
+			<input id='selectDimensions' type='checkbox' bind:checked={settings.selectDimensions}/>
+			<label for='selectDimensions'>selectDimensions</label>
+		</div>
+
+
 		{#each Object.keys(dimensions) as scale}
 			<div class="indent"><span class="dimension">{scale}</span>
 
@@ -239,29 +253,13 @@
 		{/each}
 	{/if}
 	<div>
-		<input id='showHex' type='checkbox' bind:checked={settings.showHex}/>
-		<label for='showHex'>showHex</label>
-	</div>
-	<div>
 		<input id='showLabels' type='checkbox' bind:checked={settings.showLabels}/>
 		<label for='showLabels'>showLabels</label>
 	</div>
 	<div>
-		<input id='showNumeric' type='checkbox' bind:checked={settings.showNumeric}/>
-		<label for='showNumeric'>showNumeric</label>
+		<input id='showHex' type='checkbox' bind:checked={settings.showHex}/>
+		<label for='showHex'>showHex</label>
 	</div>
-
-	<div>
-		<input id='selectDimensions' type='checkbox' bind:checked={settings.selectDimensions}/>
-		<label for='selectDimensions'>selectDimensions</label>
-	</div>
-
-	<div>
-		<label for='matrixWidth'>matrix</label>
-		<input id='matrixWidth' type='number' min=100 max=600 bind:value={settings.matrixWidth}/>x
-		<input id='matrixHeight' type='number' min=100 max=600 bind:value={settings.matrixHeight}/>
-	</div>
-
 	<div>
 		<label for='scrollbarHeight'>scroll</label>
 		<input id='scrollbarHeight' type='number' min=10 max=100 bind:value={settings.scrollbarHeight}/>
