@@ -1,11 +1,12 @@
 <script>
+	import Color from './color'
 	import { onMount } from 'svelte'
 
-	import dimensions from './dimensions'
+	import { getDimension } from './dimensions'
 
-	export let color = '#00ff00'
-	export let dimensionX = 'hslL'
-	export let dimensionY = 'hslS'
+	export let color = Color.hex('#00ff00')
+	export let dimensionX = 'hsl.l'
+	export let dimensionY = 'hsl.s'
 	export let detailX = 100
 	export let detailY = 100
 
@@ -21,14 +22,14 @@
 		ctx = canvas.getContext('2d')
 	})
 
-	$: dimX = dimensions[dimensionX]
-	$: dimY = dimensions[dimensionY]
+	$: dimX = getDimension(dimensionX)
+	$: dimY = getDimension(dimensionY)
 
-	$: valueX = Math.round(dimX.getValue(color))
-	$: valueY = Math.round(dimY.getValue(color))
+	$: valueX = color.get(dimX.scale, dimX.dim) * dimX.data.scale
+	$: valueY = color.get(dimY.scale, dimY.dim) * dimY.data.scale
 
-	$: sliderPosX = cWidth * (valueX - dimX.extents[0]) / (dimX.extents[1] - dimX.extents[0])
-	$: sliderPosY = cHeight - cHeight * (valueY - dimY.extents[0]) / (dimY.extents[1] - dimY.extents[0])
+	$: sliderPosX = cWidth * (valueX - dimX.data.extent[0]) / (dimX.data.extent[1] - dimX.data.extent[0])
+	$: sliderPosY = cHeight - cHeight * (valueY - dimY.data.extent[0]) / (dimY.data.extent[1] - dimY.data.extent[0])
 
 	$: {
 		if (ctx) {
@@ -39,12 +40,18 @@
 			let dY = Math.min(detailY, cHeight)
 			let xStep = cWidth / dX
 			let yStep = cHeight / dY
-			let rangeX = dimX.extents[1] - dimX.extents[0]
-			let rangeY = dimY.extents[1] - dimY.extents[0]
+			let rangeX = dimX.data.extent[1] - dimX.data.extent[0]
+			let rangeY = dimY.data.extent[1] - dimY.data.extent[0]
+
+			const colBase = color.to(dimY.scale)
 			for (let y = 0; y < dY; y++) {
-				const colY = dimY.setValue(color, y / detailY * rangeY + dimY.extents[0])
+				const vY = (y / detailY * rangeY + dimY.data.extent[0]) / dimY.data.scale
+				const colY = colBase.alter(dimY.scale, dimY.dim, vY)
+
 				for(let x = 0; x < dX; x++) {
-					ctx.fillStyle = dimX.setValue(colY, x / detailX * rangeX + dimX.extents[0])
+					const vX = (x / detailX * rangeX + dimX.data.extent[0]) / dimX.data.scale
+					const colYX = colY.alter(dimX.scale, dimX.dim, vX)
+					ctx.fillStyle = colYX.toHex()
 					ctx.fillRect(x * xStep, cHeight - y * yStep - 2, xStep, yStep)
 				}
 			}
@@ -62,11 +69,11 @@
 			let x = e.layerX - 1
 			let y = cHeight - e.layerY + 1
 
-			let vX = (x / cWidth) * (dimX.extents[1] - dimX.extents[0]) + dimX.extents[0]
-			let vY = (y / cHeight) * (dimY.extents[1] - dimY.extents[0]) + dimY.extents[0]
+			let vX = (x / cWidth) * (dimX.data.extent[1] - dimX.data.extent[0]) + dimX.data.extent[0]
+			let vY = (y / cHeight) * (dimY.data.extent[1] - dimY.data.extent[0]) + dimY.data.extent[0]
 
-			const colX = dimX.setValue(color, vX)
-			color = dimY.setValue(colX, vY).hex()
+			const colY = color.alter(dimY.scale, dimY.dim, vY / dimY.data.scale)
+			color = colY.alter(dimX.scale, dimX.dim, vX / dimX.data.scale)
 		}
 	}
 </script>

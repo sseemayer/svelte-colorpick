@@ -21,6 +21,6 @@
     "dist"
   ],
   "dependencies": {
-    "chroma-js": "^2.1.0"
+    "d3-color": "^2.0.0"
   }
 }

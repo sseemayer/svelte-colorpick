@@ -8,7 +8,7 @@
 
 	let presets = {
 		full: {
-			selectedDimension: 'hslH',
+			selectedDimension: 'hsl.h',
 
 			showMatrix: true,
 			showSlidersGlobal: true,
@@ -17,17 +17,17 @@
 			showLabels: true,
 
 			showSliders: {
-				hslH: true,
-				hslS: true,
-				hslL: true,
+				"hsl.h": true,
+				"hsl.s": true,
+				"hsl.l": true,
 
-				hclH: true,
-				hclC: true,
-				hclL: true,
+				"hcl.h": true,
+				"hcl.c": true,
+				"hcl.l": true,
 
-				rgbR: true,
-				rgbG: true,
-				rgbB: true,
+				"rgb.r": true,
+				"rgb.g": true,
+				"rgb.b": true,
 			},
 
 			selectDimensions: true,
@@ -38,7 +38,7 @@
 		},
 
 		hsl: {
-			selectedDimension: 'hslH',
+			selectedDimension: 'hsl.h',
 
 			showMatrix: true,
 			showSlidersGlobal: true,
@@ -47,17 +47,17 @@
 			showLabels: true,
 
 			showSliders: {
-				hslH: true,
-				hslS: true,
-				hslL: true,
+				"hsl.h": true,
+				"hsl.s": true,
+				"hsl.l": true,
 
-				hclH: false,
-				hclC: false,
-				hclL: false,
+				"hcl.h": false,
+				"hcl.c": false,
+				"hcl.l": false,
 
-				rgbR: false,
-				rgbG: false,
-				rgbB: false,
+				"rgb.r": false,
+				"rgb.g": false,
+				"rgb.b": false,
 			},
 
 			selectDimensions: true,
@@ -68,7 +68,7 @@
 		},
 
 		hcl: {
-			selectedDimension: 'hclH',
+			selectedDimension: 'hcl.h',
 
 			showMatrix: true,
 			showSlidersGlobal: true,
@@ -77,17 +77,17 @@
 			showLabels: true,
 
 			showSliders: {
-				hslH: false,
-				hslS: false,
-				hslL: false,
+				"hsl.h": false,
+				"hsl.s": false,
+				"hsl.l": false,
 
-				hclH: true,
-				hclC: true,
-				hclL: true,
+				"hcl.h": true,
+				"hcl.c": true,
+				"hcl.l": true,
 
-				rgbR: false,
-				rgbG: false,
-				rgbB: false,
+				"rgb.r": false,
+				"rgb.g": false,
+				"rgb.b": false,
 			},
 
 			selectDimensions: true,
@@ -98,7 +98,7 @@
 		},
 
 		miniHsl: {
-			selectedDimension: 'hslH',
+			selectedDimension: 'hsl.h',
 
 			showMatrix: true,
 			showSlidersGlobal: true,
@@ -107,17 +107,17 @@
 			showLabels: false,
 
 			showSliders: {
-				hslH: true,
-				hslS: false,
-				hslL: false,
+				"hsl.h": true,
+				"hsl.s": false,
+				"hsl.l": false,
 
-				hclH: false,
-				hclC: false,
-				hclL: false,
+				"hcl.h": false,
+				"hcl.c": false,
+				"hcl.l": false,
 
-				rgbR: false,
-				rgbG: false,
-				rgbB: false,
+				"rgb.r": false,
+				"rgb.g": false,
+				"rgb.b": false,
 			},
 
 			selectDimensions: false,
@@ -128,7 +128,7 @@
 		},
 
 		miniHcl: {
-			selectedDimension: 'hclH',
+			selectedDimension: 'hcl.h',
 
 			showMatrix: true,
 			showSlidersGlobal: true,
@@ -137,17 +137,17 @@
 			showLabels: false,
 
 			showSliders: {
-				hslH: false,
-				hslS: false,
-				hslL: false,
+				"hsl.h": false,
+				"hsl.s": false,
+				"hsl.l": false,
 
-				hclH: true,
-				hclC: false,
-				hclL: false,
+				"hcl.h": true,
+				"hcl.c": false,
+				"hcl.l": false,
 
-				rgbR: false,
-				rgbG: false,
-				rgbB: false,
+				"rgb.r": false,
+				"rgb.g": false,
+				"rgb.b": false,
 			},
 
 			selectDimensions: false,
@@ -174,7 +174,7 @@
 
 		collapse={collapse}
 
-	 	selectedDimension={settings.selectedDimension}
+		selectedDimension={settings.selectedDimension}
 
 		showMatrix={settings.showMatrix}
 		showSliders={settings.showSlidersGlobal && settings.showSliders}

@@ -1,11 +1,19 @@
 <script>
+	import Color from './color'
+	import { dimensions } from './dimensions.js'
+
 	import ScrollBar from './Scrollbar.svelte'
 	import Matrix from './Matrix.svelte'
 	import DimInput from './DimInput.svelte'
 	import HexInput from './HexInput.svelte'
 
-	export let color = '#ff9900'
-	export let selectedDimension = 'hslH'
+	export let color = Color.hex('#ff9900')
+
+	if (typeof color === 'string') {
+		color = Color.hex(color)
+	}
+
+	export let selectedDimension = 'hsl.h'
 
 	export let collapse = false
 	export let handleWidth = 32
@@ -13,17 +21,17 @@
 
 	export let showMatrix = true
 	export let showSliders = {
-		hslH: true,
-		hslS: true,
-		hslL: true,
+		"hsl.h": true,
+		"hsl.s": true,
+		"hsl.l": true,
 
-		hclH: true,
-		hclC: true,
-		hclL: true,
+		"hcl.h": true,
+		"hcl.c": true,
+		"hcl.l": true,
 
-		rgbR: true,
-		rgbG: true,
-		rgbB: true,
+		"rgb.r": true,
+		"rgb.g": true,
+		"rgb.b": true,
 	}
 	export let showHex = true
 	export let showNumeric = true
@@ -40,49 +48,34 @@
 	let dimX = null
 	let dimY = null
 
-	const dims = [
-		{
-			group: 'hsl',
-			dims: ['hslH', 'hslS', 'hslL'],
-		},
-		{
-			group: 'hcl',
-			dims: ['hclH', 'hclC', 'hclL'],
-		},
-		{
-			group: 'rgb',
-			dims: ['rgbR', 'rgbG', 'rgbB'],
-		},
-	]
-
 	$: {
-		if (selectedDimension === 'hslH') {
-			dimX = 'hslS'
-			dimY = 'hslL'
-		} else if (selectedDimension === 'hslS') {
-			dimX = 'hslH'
-			dimY = 'hslL'
-		} else if (selectedDimension === 'hslL') {
-			dimX = 'hslH'
-			dimY = 'hslS'
-		} else if (selectedDimension === 'hclH') {
-			dimX = 'hclC'
-			dimY = 'hclL'
-		} else if (selectedDimension === 'hclC') {
-			dimX = 'hclH'
-			dimY = 'hclL'
-		} else if (selectedDimension === 'hclL') {
-			dimX = 'hclH'
-			dimY = 'hclC'
-		} else if (selectedDimension === 'rgbR') {
-			dimX = 'rgbG'
-			dimY = 'rgbB'
-		} else if (selectedDimension === 'rgbG') {
-			dimX = 'rgbR'
-			dimY = 'rgbB'
-		} else if (selectedDimension === 'rgbB') {
-			dimX = 'rgbR'
-			dimY = 'rgbG'
+		if (selectedDimension === 'hsl.h') {
+			dimX = 'hsl.s'
+			dimY = 'hsl.l'
+		} else if (selectedDimension === 'hsl.s') {
+			dimX = 'hsl.h'
+			dimY = 'hsl.l'
+		} else if (selectedDimension === 'hsl.l') {
+			dimX = 'hsl.h'
+			dimY = 'hsl.s'
+		} else if (selectedDimension === 'hcl.h') {
+			dimX = 'hcl.c'
+			dimY = 'hcl.l'
+		} else if (selectedDimension === 'hcl.c') {
+			dimX = 'hcl.h'
+			dimY = 'hcl.l'
+		} else if (selectedDimension === 'hcl.l') {
+			dimX = 'hcl.h'
+			dimY = 'hcl.c'
+		} else if (selectedDimension === 'rgb.r') {
+			dimX = 'rgb.g'
+			dimY = 'rgb.b'
+		} else if (selectedDimension === 'rgb.g') {
+			dimX = 'rgb.r'
+			dimY = 'rgb.b'
+		} else if (selectedDimension === 'rgb.b') {
+			dimX = 'rgb.r'
+			dimY = 'rgb.g'
 		}
 	}
 
@@ -98,7 +91,7 @@
 	{/if}
 
 	{#if collapse}
-	<div class="color-picker-handle" style='width: {handleWidth}px; height: {handleHeight}px; background: {color};' on:click={() => collapsed = false}></div>
+	<div class="color-picker-handle" style='width: {handleWidth}px; height: {handleHeight}px; background: {color.toHex()};' on:click={() => collapsed = false}></div>
 	{/if}
 
 	<div class='color-picker-controls {collapse && collapsed ? "collapsed" : ""}'>
@@ -113,21 +106,21 @@
 		{/if}
 
 		{#if showSliders}
-		{#each dims as dimGroup}
+		{#each Object.keys(dimensions) as scale}
 		<div class="group">
-			{#each dimGroup.dims as dim}
-				{#if showSliders[dim]}
+			{#each Object.keys(dimensions[scale]) as dim}
+				{#if showSliders[`${scale}.${dim}`]}
 				<div class="slider">
 					{#if selectDimensions}
-						<input type="radio" bind:group={selectedDimension} value={dim} id={dim}>
+						<input type="radio" bind:group={selectedDimension} value="{scale}.{dim}" id="{scale}-{dim}">
 					{/if}
 					{#if showLabels}
-						<label for={dim}>{dim.substr(3, 1).toUpperCase()}</label>
+						<label for="{scale}-{dim}">{dim.toUpperCase()}</label>
 					{/if}
-					<ScrollBar width={sliderWidth} height={scrollbarHeight} dimension={dim} bind:color={color}/>
+					<ScrollBar width={sliderWidth} height={scrollbarHeight} dimension="{scale}.{dim}" bind:color={color}/>
 
 					{#if showNumeric}
-					<DimInput bind:color={color} dimension={dim}/>
+						<DimInput bind:color={color} dimension="{scale}.{dim}"/>
 					{/if}
 				</div>
 				{/if}

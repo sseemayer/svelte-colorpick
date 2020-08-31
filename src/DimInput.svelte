@@ -1,24 +1,25 @@
 <script>
-	import dimensions from './dimensions'
+	import Color from './color'
+	import { getDimension} from './dimensions'
 
-	export let color = '#00ff00'
-	export let dimension = 'hslH'
+	export let color = Color.hex('#00ff00')
+	export let dimension = 'hsl.h'
 
-	$: dim = dimensions[dimension]
-	$: value = dim.getValue(color)
+	$: dim = getDimension(dimension)
+	$: value = color.get(dim.scale, dim.dim) * dim.data.scale
 	$: roundedValue = Math.round(value)
 
 	function onChange(e) {
 		let v = +e.target.value
-		color = dim.setValue(color, v).hex()
+		color = color.alter(dim.scale, dim.dim, v / dim.data.scale)
 	}
 </script>
 
 <input
 	type="number"
 	value={roundedValue}
-	min={dim.extents[0]}
-	max={dim.extents[1]}
+	min={dim.data.extent[0]}
+	max={dim.data.extent[1]}
 	on:change={onChange}
 />
 

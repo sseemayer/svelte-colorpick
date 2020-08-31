@@ -1,15 +1,14 @@
 <script>
-	import chroma from 'chroma-js'
-	export let color = '#00ff00'
+	export let color = Color.hex('#00ff00')
 	export let id = null
 	export let width = null
 
-	$: value = chroma(color).hex()
+	$: value = color.toHex()
 
 	function onChange(e) {
-		let v = e.target.value
-		if (chroma.valid(v)) {
-			color = chroma(v).hex()
+		let v = Color.hex(e.target.value)
+		if (v.data != null) {
+			color = v
 		} else {
 			e.target.value = value
 		}

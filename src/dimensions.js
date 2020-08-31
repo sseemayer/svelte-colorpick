@@ -1,67 +1,28 @@
-import chroma from 'chroma-js'
-
-let dimensions = {}
-let lastHue = null
-
-const keysHsl = ['hslH', 'hslS', 'hslL']
-for (let i = 0; i < keysHsl.length; i++) {
-	const k = keysHsl[i]
-	const scale = i === 0 ? 1 : 100
-	dimensions[k] = {
-		getValue (color) {
-			return chroma(color).hsl()[i] * scale || 0
-		},
-		setValue (color, value) {
-			let colorHsl = chroma(color).hsl()
-			if (isNaN(colorHsl[0])) {
-				colorHsl[0] = lastHue
-			} else {
-				lastHue = colorHsl[0]
-			}
-			colorHsl[i] = value / scale
-			return chroma.hsl(...colorHsl)
-		},
-		extents: [0, i === 0 ? 359 : 100]
-	}
+export const dimensions = {
+	hsl: {
+		h: {extent: [0, 360], scale: 1, title: 'hue'},
+		s: {extent: [0, 100], scale: 100, title: 'saturation'},
+		l: {extent: [0, 100], scale: 100, title: 'luminance'},
+	},
+	
+	'hcl': {
+		h: {extent: [0, 360], scale: 1, title: 'hue'},
+		c: {extent: [0, 150], scale: 1, title: 'chroma'},
+		l: {extent: [0, 100], scale: 1, title: 'luminance'},
+	},
+	
+	'rgb': {
+		r: {extent: [0, 255], scale: 1, title: 'red'},
+		g: {extent: [0, 255], scale: 1, title: 'green'},
+		b: {extent: [0, 255], scale: 1, title: 'blue'},
+	},
 }
 
-const keysHcl = ['hclH', 'hclC', 'hclL']
-for (let i = 0; i < keysHcl.length; i++) {
-	const k = keysHcl[i]
-	const scale = 1;
-	dimensions[k] = {
-		getValue (color) {
-			return chroma(color).hcl()[i] * scale || 0
-		},
-		setValue (color, value) {
-			let colorHcl = chroma(color).hcl()
-			if (isNaN(colorHcl[0])) {
-				colorHcl[0] = lastHue
-			} else {
-				lastHue = colorHcl[0]
-			}
-			colorHcl[i] = value / scale
-			return chroma.hcl(...colorHcl)
-		},
-		extents: [0, i === 0 ? 359 : 100]
+export function getDimension(specifier) {
+	let [scale, dim] = specifier.split('.', 2)
+	return {
+		scale,
+		dim,
+		data: dimensions[scale][dim]
 	}
 }
-
-const keysRgb = ['rgbR', 'rgbG', 'rgbB']
-for (let i = 0; i < keysRgb.length; i++) {
-	const k = keysRgb[i]
-	dimensions[k] = {
-		getValue (color) {
-			return chroma(color).rgb()[i] || 0
-		},
-		setValue (color, value) {
-			let colorRgb = chroma(color).rgb()
-			colorRgb[i] = value
-			return chroma.rgb(...colorRgb)
-		},
-		extents: [0, 255]
-	}
-
-}
-
-export default dimensions
