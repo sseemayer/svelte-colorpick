@@ -7,6 +7,9 @@
 
 	let settings;
 
+	let handleWidth = 32
+	let handleHeight = 32
+
 	let presets = {
 		full: {
 			selectedDimension: 'hsl.h',
@@ -180,6 +183,9 @@
 		bind:color={color}
 
 		collapse={collapse}
+		handleWidth={handleWidth}
+		handleHeight={handleHeight}
+
 		tabbed={settings.tabbed}
 		selectedTab={settings.selectedTab}
 
@@ -203,6 +209,8 @@
 	<div>
 		<input id='collapse' type='checkbox' bind:checked={collapse}/>
 		<label for='collapse'>collapse</label>
+		<input id='handleWidth' type='number' min=10 max=100 bind:value={handleWidth}/>x
+		<input id='handleHeight' type='number' min=10 max=100 bind:value={handleHeight}/>
 	</div>
 	<h2>Settings</h2>
 	<div>
@@ -294,7 +302,7 @@
 		display: inline-block;
 	}
 
-	#matrixWidth, #matrixHeight, #scrollbarHeight {
+	#matrixWidth, #matrixHeight, #scrollbarHeight, #handleWidth, #handleHeight {
 		width: 80px;
 	}
 </style>
