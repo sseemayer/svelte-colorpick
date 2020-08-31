@@ -1,5 +1,6 @@
 <script>
-	import ColorPicker from 'svelte-colorpick'
+	import {default as ColorPicker, dimensions} from 'svelte-colorpick'
+
 
 	let color = '#ff9900'
 	let collapse = false
@@ -27,6 +28,10 @@
 				"hcl.h": true,
 				"hcl.c": true,
 				"hcl.l": true,
+
+				"lab.l": true,
+				"lab.a": true,
+				"lab.b": true,
 
 				"rgb.r": true,
 				"rgb.g": true,
@@ -86,6 +91,29 @@
 			selectDimensions: true,
 
 			matrixWidth: 300,
+			matrixHeight: 200,
+			scrollbarHeight: 20,
+		},
+
+		miniLab: {
+			selectedDimension: 'lab.l',
+
+			tabbed: false,
+			selectedTab: 'lab',
+
+			showMatrix: true,
+			showSlidersGlobal: true,
+			showHex: false,
+			showNumeric: true,
+			showLabels: true,
+
+			showSliders: {
+				"lab.l": true,
+			},
+
+			selectDimensions: false,
+
+			matrixWidth: 200,
 			matrixHeight: 200,
 			scrollbarHeight: 20,
 		},
@@ -190,10 +218,15 @@
 		<label for='showSliders'>showSliders</label>
 	</div>
 	{#if settings.showSlidersGlobal}
-		{#each Object.keys(settings.showSliders) as dim}
-			<div class="indent">
-				<input id='showSliders-{dim}' type='checkbox' bind:checked={settings.showSliders[dim]}/>
-				<label for='showSliders-{dim}'>{dim}</label>
+		{#each Object.keys(dimensions) as scale}
+			<div class="indent"><span class="dimension">{scale}</span>
+
+				{#each Object.keys(dimensions[scale]) as dim}
+					<div class="indent">
+						<input id='showSliders-{scale}-{dim}' type='checkbox' bind:checked={settings.showSliders[`${scale}.${dim}`]}/>
+						<label for='showSliders-{scale}-{dim}'>{scale}.{dim}</label>
+					</div>
+				{/each}
 			</div>
 		{/each}
 	{/if}

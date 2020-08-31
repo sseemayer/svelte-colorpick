@@ -1,4 +1,6 @@
 <script>
+	import Color from './color'
+
 	export let color = Color.hex('#00ff00')
 	export let id = null
 	export let width = null
