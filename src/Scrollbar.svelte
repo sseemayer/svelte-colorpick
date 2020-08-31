@@ -23,7 +23,7 @@
 	$: dim = getDimension(dimension)
 
 	$: value = color.get(dim.scale, dim.dim) * dim.data.scale
-	$: sliderPos = cWidth * (value - dim.data.extent[0]) / (dim.data.extent[1] - dim.data.extent[0])
+	$: sliderPos = (cWidth - 2) * (value - dim.data.extent[0]) / (dim.data.extent[1] - dim.data.extent[0])
 
 	$: {
 		if (ctx) {
@@ -31,12 +31,12 @@
 			ctx.clearRect(0, 0, cWidth, cHeight)
 
 			let d = Math.min(detail, cWidth)
-			let xStep = cWidth / d
+			let xStep = (cWidth - 2) / d
 			let range = dim.data.extent[1] - dim.data.extent[0]
 
 			const colBase = color.to(dim.scale)
 
-			for(let i = 0; i < d; i++) {
+			for(let i = 0; i <= d; i++) {
 				const v = (i / d * range + dim.data.extent[0]) / dim.data.scale
 				const col = colBase.alter(dim.scale, dim.dim, v)
 				ctx.fillStyle = col.toHex()
@@ -53,9 +53,11 @@
 
 	function onMouse(e) {
 		if (e.buttons === 1) {
-			let x = e.layerX
+			let x = e.layerX - 1
 
-			let v = (x / cWidth) * (dim.data.extent[1] - dim.data.extent[0]) + dim.data.extent[0]
+			let v = (x / (cWidth - 2)) * (dim.data.extent[1] - dim.data.extent[0]) + dim.data.extent[0]
+			if (v > dim.data.extent[1]) { v = dim.data.extent[1] }
+			if (v < dim.data.extent[0]) { v = dim.data.extent[0] }
 			color = color.alter(dim.scale, dim.dim, v / dim.data.scale)
 		}
 	}

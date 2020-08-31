@@ -38,21 +38,21 @@
 
 			let dX = Math.min(detailX, cWidth)
 			let dY = Math.min(detailY, cHeight)
-			let xStep = cWidth / dX
-			let yStep = cHeight / dY
+			let xStep = (cWidth - 2) / dX
+			let yStep = (cHeight - 2) / dY
 			let rangeX = dimX.data.extent[1] - dimX.data.extent[0]
 			let rangeY = dimY.data.extent[1] - dimY.data.extent[0]
 
 			const colBase = color.to(dimY.scale)
-			for (let y = 0; y < dY; y++) {
+			for (let y = 0; y <= dY; y++) {
 				const vY = (y / detailY * rangeY + dimY.data.extent[0]) / dimY.data.scale
 				const colY = colBase.alter(dimY.scale, dimY.dim, vY)
 
-				for(let x = 0; x < dX; x++) {
+				for(let x = 0; x <= dX; x++) {
 					const vX = (x / detailX * rangeX + dimX.data.extent[0]) / dimX.data.scale
 					const colYX = colY.alter(dimX.scale, dimX.dim, vX)
 					ctx.fillStyle = colYX.toHex()
-					ctx.fillRect(x * xStep, cHeight - y * yStep - 2, xStep, yStep)
+					ctx.fillRect(x * xStep, (cHeight - 2) - y * yStep, xStep, yStep)
 				}
 			}
 
@@ -67,10 +67,10 @@
 	function onMouse(e) {
 		if (e.buttons === 1) {
 			let x = e.layerX - 1
-			let y = cHeight - e.layerY + 1
+			let y = (cHeight - 2) - e.layerY
 
-			let vX = (x / cWidth) * (dimX.data.extent[1] - dimX.data.extent[0]) + dimX.data.extent[0]
-			let vY = (y / cHeight) * (dimY.data.extent[1] - dimY.data.extent[0]) + dimY.data.extent[0]
+			let vX = (x / (cWidth - 2)) * (dimX.data.extent[1] - dimX.data.extent[0]) + dimX.data.extent[0]
+			let vY = (y / (cHeight - 2)) * (dimY.data.extent[1] - dimY.data.extent[0]) + dimY.data.extent[0]
 
 			const colY = color.alter(dimY.scale, dimY.dim, vY / dimY.data.scale)
 			color = colY.alter(dimX.scale, dimX.dim, vX / dimX.data.scale)
