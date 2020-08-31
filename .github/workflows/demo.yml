@@ -22,8 +22,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: cd demo/
-    - run: npm run build --if-present
-
+    - name: Install packages
+      run: npm install --if-present
+    - name: Build demo
+      run: npm run build --if-present
     - name: GitHub Pages
       uses: crazy-max/ghaction-github-pages@v2.1.2
       with:
