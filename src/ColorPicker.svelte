@@ -161,6 +161,7 @@
 		right: 0;
 		bottom: 0;
 		background: rgba(0, 0, 0, 0.2);
+		z-index: 9999999;
 	}
 
 	.color-picker.collapse .color-picker-controls {
@@ -172,6 +173,8 @@
 		border-radius: 5px;
 		box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
 		padding: 5px;
+
+		z-index: 100000000;
 	}
 
 	.color-picker.collapse .color-picker-controls.collapsed {
