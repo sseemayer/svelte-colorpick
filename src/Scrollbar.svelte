@@ -33,9 +33,11 @@
 			ctx.imageSmoothingEnabled = false
 			ctx.clearRect(0, 0, cWidth, cHeight)
 
-			let d = Math.min(detail, cWidth)
+			let d = Math.min(detail, cWidth - 2)
 			let xStep = (cWidth - 2) / d
 			let range = dim.data.extent[1] - dim.data.extent[0]
+
+			console.log(xStep)
 
 			const colBase = color.to(dim.scale)
 
@@ -43,7 +45,7 @@
 				const v = (i / d * range + dim.data.extent[0]) / dim.data.scale
 				const col = colBase.alter(dim.scale, dim.dim, v)
 				ctx.fillStyle = col.toHex()
-				ctx.fillRect(i * xStep, 0, xStep, cHeight)
+				ctx.fillRect(Math.round(i * xStep), 0, Math.ceil(xStep), cHeight)
 			}
 
 			ctx.fillStyle = '#ffffff'

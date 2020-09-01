@@ -39,8 +39,8 @@
 			ctx.clearRect(0, 0, cWidth, cHeight)
 			ctx.imageSmoothingEnabled = false
 
-			let dX = Math.min(detailX, cWidth)
-			let dY = Math.min(detailY, cHeight)
+			let dX = Math.min(detailX, cWidth - 2)
+			let dY = Math.min(detailY, cHeight - 2)
 			let xStep = (cWidth - 2) / dX
 			let yStep = (cHeight - 2) / dY
 			let rangeX = dimX.data.extent[1] - dimX.data.extent[0]
@@ -55,7 +55,7 @@
 					const vX = (x / detailX * rangeX + dimX.data.extent[0]) / dimX.data.scale
 					const colYX = colY.alter(dimX.scale, dimX.dim, vX)
 					ctx.fillStyle = colYX.toHex()
-					ctx.fillRect(x * xStep, (cHeight - 2) - y * yStep, xStep, yStep)
+					ctx.fillRect(Math.round(x * xStep), Math.round((cHeight - 2) - y * yStep), Math.ceil(xStep), Math.ceil(yStep))
 				}
 			}
 
