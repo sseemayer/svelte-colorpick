@@ -1,7 +1,8 @@
 <script>
 	import { ColorPicker, dimensions, Color } from 'svelte-colorpick'
 
-	let color = Color.hex('#ff9900')
+	let color = Color.hex('#228800')
+	let background = '#eeeeee'
 	let collapse = false
 
 	let settings;
@@ -173,6 +174,15 @@
 
 	applyPreset('full')
 
+	$: {
+		if (color.isDark()) {
+			document.body.classList.remove('dark')
+			background = '#eeeeee'
+		} else {
+			document.body.classList.add('dark')
+			background = '#222222'
+		}
+	}
 </script>
 
 <div class="wrapper">
@@ -194,6 +204,7 @@
 			<div class="demo">
 				<ColorPicker
 					bind:color={color}
+					background={background}
 
 					collapse={collapse}
 					handleWidth={handleWidth}
@@ -311,18 +322,14 @@
 </div>
 
 <style>
-	.layout {
-		display: flex;
-	}
 
-	.wrapper {
-		background: #fff;
-		padding: 40px;
+	h1, h2, h3, h4 {
+		font-weight: 400;
 	}
-
 
 	.title h1 {
 		margin: 10px 0 5px 0;
+		font-size: 250%;
 		display: inline-block;
 	}
 
@@ -370,25 +377,6 @@
 		.demo-container {
 			margin: 0 0 30px 0;
 		}
-	}
-
-	.demo {
-		background: #fff;
-		display: inline-block;
-		box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
-		border-radius: 5px;
-		padding: 5px;
-		line-height: 0;
-	}
-
-	.settings-panel {
-		flex-grow: 1;
-		min-width: 300px;
-		background: #eee;
-		border: 1px solid #ccc;
-		box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
-		border-radius: 5px;
-		padding: 20px;
 	}
 
 	.indent {

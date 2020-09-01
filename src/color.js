@@ -70,6 +70,11 @@ export default class Color {
 		const hex = color.formatHex()
 		return hex
 	}
+
+	isDark () {
+		let color = this.to('rgb').data
+		return (color.r * 0.299 + color.g * 0.587 + color.b * 0.114) <= 186
+	}
 }
 
 

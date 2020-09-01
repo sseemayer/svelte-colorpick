@@ -17,6 +17,7 @@
 
 	export let selectedDimension = 'hsl.h'
 	export let selectedTab = 'hsl'
+	export let background = '#eeeeee'
 
 	export let collapse = false
 	export let tabbed = false
@@ -73,7 +74,7 @@
 	<div class="color-picker-handle" style='width: {handleWidth}px; height: {handleHeight}px; background: {color.toHex()};' on:click={() => collapsed = false}></div>
 	{/if}
 
-	<div class='color-picker-controls {collapse && collapsed ? "collapsed" : ""}'>
+	<div class='color-picker-controls {collapse && collapsed ? "collapsed" : ""}' style="background: {background};">
 		{#if showMatrix}
 		<Matrix
 			bind:color={color}
@@ -167,7 +168,6 @@
 		top: -5px;
 		left: -5px;
 
-		background: #fff;
 		border: 1px solid #666;
 		border-radius: 5px;
 		box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
@@ -187,16 +187,14 @@
 	.tab {
 		margin: 0 5px;
 		padding: 0 3px;
-		color: #aaa;
-		border-bottom: 2px solid #aaa;
+		border-bottom: 1px solid #aaa;
 		cursor: pointer;
 		text-transform: uppercase;
 		font-weight: bold;
 	}
 
 	.tab.active {
-		color: #333;
-		border-color: #333;
+		border-bottom-width: 3px;
 	}
 
 	.group {

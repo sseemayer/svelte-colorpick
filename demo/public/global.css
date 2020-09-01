@@ -16,6 +16,11 @@ body {
 	margin: 0 auto;
 }
 
+body.dark {
+	color: #fff;
+	background: #000;
+}
+
 a {
 	color: rgb(0,100,200);
 	text-decoration: none;
@@ -54,6 +59,16 @@ button {
 	outline: none;
 }
 
+body.dark button {
+	background-color: #444;
+	color: #fff;
+}
+
+body.dark input {
+	background-color: #000;	
+	color: #fff;
+}
+
 button:disabled {
 	color: #999;
 }
@@ -65,3 +80,53 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+.layout {
+	display: flex;
+}
+
+.wrapper {
+	background: #fff;
+	padding: 40px;
+}
+
+body.dark .wrapper {
+	background: #111;
+}
+
+pre {
+	padding: 10px;
+	background: #eee;
+	border-radius: 5px;
+}
+
+body.dark pre {
+	background: #444;
+}
+
+.demo {
+	background: #fff;
+	display: inline-block;
+	box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
+	border-radius: 5px;
+	padding: 5px;
+	line-height: 0;
+}
+
+body.dark .demo {
+	background: #222;
+}
+
+.settings-panel {
+	flex-grow: 1;
+	min-width: 300px;
+	background: #eee;
+	box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
+	border-radius: 5px;
+	padding: 20px;
+}
+
+body.dark .settings-panel {
+	background: #222;
+}
+
