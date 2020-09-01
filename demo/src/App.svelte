@@ -287,8 +287,9 @@
 		margin: 0 30px 30px 0;
 		flex-grow: 10;
 
-		text-align: center;
-
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	@media (max-width: 600px) {
