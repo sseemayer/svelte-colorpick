@@ -37,8 +37,6 @@
 			let xStep = (cWidth - 2) / d
 			let range = dim.data.extent[1] - dim.data.extent[0]
 
-			console.log(xStep)
-
 			const colBase = color.to(dim.scale)
 
 			for(let i = 0; i <= d; i++) {
