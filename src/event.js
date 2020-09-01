@@ -2,22 +2,16 @@ export function relativePosition (e) {
 	let clientX = e.clientX
 	let clientY = e.clientY
 
-	let offsetX = 0
-	let offsetY = 0
-
-	let target = e.target
-	while (target) {
-		offsetX += target.offsetLeft
-		offsetY += target.offsetTop
-		target = target.offsetParent
-	}
+	let rect = e.target.getBoundingClientRect()
+	const relativeX = clientX - rect.x
+	const relativeY = clientY - rect.y
 
 	return {
 		clientX,
 		clientY,
-		offsetX,
-		offsetY,
-		relativeX: clientX - offsetX,
-		relativeY: clientY - offsetY,
+		offsetX: rect.x,
+		offsetY: rect.y,
+		relativeX,
+		relativeY,
 	}
 }
