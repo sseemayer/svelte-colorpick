@@ -177,103 +177,130 @@
 
 <h1>svelte-colorpick</h1>
 
-<div class="demo">
-	<ColorPicker
-		bind:color={color}
+<div class="layout">
 
-		collapse={collapse}
-		handleWidth={handleWidth}
-		handleHeight={handleHeight}
+	<div class="demo-container">
+	<div class="demo">
+		<ColorPicker
+			bind:color={color}
 
-		tabbed={settings.tabbed}
-		selectedTab={settings.selectedTab}
+			collapse={collapse}
+			handleWidth={handleWidth}
+			handleHeight={handleHeight}
 
-		selectedDimension={settings.selectedDimension}
+			tabbed={settings.tabbed}
+			selectedTab={settings.selectedTab}
 
-		showMatrix={settings.showMatrix}
-		showSliders={settings.showSlidersGlobal && settings.showSliders}
-		showHex={settings.showHex}
-		showLabels={settings.showLabels}
-		showNumeric={settings.showNumeric}
-		selectDimensions={settings.selectDimensions}
+			selectedDimension={settings.selectedDimension}
 
-		matrixWidth={settings.matrixWidth}
-		matrixHeight={settings.matrixHeight}
-		scrollbarHeight={settings.scrollbarHeight}
-	/>
-</div>
+			showMatrix={settings.showMatrix}
+			showSliders={settings.showSlidersGlobal && settings.showSliders}
+			showHex={settings.showHex}
+			showLabels={settings.showLabels}
+			showNumeric={settings.showNumeric}
+			selectDimensions={settings.selectDimensions}
 
-<div class='settings-panel'>
-	<h3>Mode</h3>
-	<div>
-		<input id='collapse' type='checkbox' bind:checked={collapse}/>
-		<label for='collapse'>collapse</label>
-		<input id='handleWidth' type='number' min=10 max=100 bind:value={handleWidth}/>x
-		<input id='handleHeight' type='number' min=10 max=100 bind:value={handleHeight}/>
+			matrixWidth={settings.matrixWidth}
+			matrixHeight={settings.matrixHeight}
+			scrollbarHeight={settings.scrollbarHeight}
+		/>
+	</div>
 	</div>
 
-	<h3>Presets</h3>
-	{#each Object.keys(presets) as preset}
-		<button on:click={() => applyPreset(preset)}>{preset}</button>
-	{/each}
-
-	<h3>Settings</h3>
-	<div>
-		<input id='showMatrix' type='checkbox' bind:checked={settings.showMatrix}/>
-		<label for='showMatrix'>showMatrix</label>
-		<input id='matrixWidth' type='number' min=100 max=600 bind:value={settings.matrixWidth}/>x
-		<input id='matrixHeight' type='number' min=100 max=600 bind:value={settings.matrixHeight}/>
-	</div>
-	<div>
-		<input id='showSliders' type='checkbox' bind:checked={settings.showSlidersGlobal}/>
-		<label for='showSliders'>showSliders</label>
-	</div>
-	{#if settings.showSlidersGlobal}
-		<div class="indent">
-			<input id='tabbed' type='checkbox' bind:checked={settings.tabbed}/>
-			<label for='tabbed'>tabbed</label>
+	<div class='settings-panel'>
+		<h2>Settings</h2>
+		<h3>Mode</h3>
+		<div>
+			<input id='collapse' type='checkbox' bind:checked={collapse}/>
+			<label for='collapse'>collapse</label>
+			<input id='handleWidth' type='number' min=10 max=100 bind:value={handleWidth}/>x
+			<input id='handleHeight' type='number' min=10 max=100 bind:value={handleHeight}/>
 		</div>
 
-		<div class="indent">
-			<input id='showNumeric' type='checkbox' bind:checked={settings.showNumeric}/>
-			<label for='showNumeric'>showNumeric</label>
-		</div>
-
-		<div class="indent">
-			<input id='selectDimensions' type='checkbox' bind:checked={settings.selectDimensions}/>
-			<label for='selectDimensions'>selectDimensions</label>
-		</div>
-
-
-		{#each Object.keys(dimensions) as scale}
-			<div class="indent"><span class="dimension">{scale}</span>
-
-				{#each Object.keys(dimensions[scale]) as dim}
-					<div class="scale-dim">
-						<input id='showSliders-{scale}-{dim}' type='checkbox' bind:checked={settings.showSliders[`${scale}.${dim}`]}/>
-						<label for='showSliders-{scale}-{dim}'>{dim}</label>
-					</div>
-				{/each}
-			</div>
+		<h3>Presets</h3>
+		{#each Object.keys(presets) as preset}
+			<button on:click={() => applyPreset(preset)}>{preset}</button>
 		{/each}
-	{/if}
-	<div>
-		<input id='showLabels' type='checkbox' bind:checked={settings.showLabels}/>
-		<label for='showLabels'>showLabels</label>
-	</div>
-	<div>
-		<input id='showHex' type='checkbox' bind:checked={settings.showHex}/>
-		<label for='showHex'>showHex</label>
-	</div>
-	<div>
-		<label for='scrollbarHeight'>scroll</label>
-		<input id='scrollbarHeight' type='number' min=10 max=100 bind:value={settings.scrollbarHeight}/>
-	</div>
 
+		<h3>UI Elements</h3>
+		<div>
+			<input id='showMatrix' type='checkbox' bind:checked={settings.showMatrix}/>
+			<label for='showMatrix'>showMatrix</label>
+			<input id='matrixWidth' type='number' min=100 max=600 bind:value={settings.matrixWidth}/>x
+			<input id='matrixHeight' type='number' min=100 max=600 bind:value={settings.matrixHeight}/>
+		</div>
+		<div>
+			<input id='showSliders' type='checkbox' bind:checked={settings.showSlidersGlobal}/>
+			<label for='showSliders'>showSliders</label>
+		</div>
+		{#if settings.showSlidersGlobal}
+			<div class="indent">
+				<input id='tabbed' type='checkbox' bind:checked={settings.tabbed}/>
+				<label for='tabbed'>tabbed</label>
+			</div>
+
+			<div class="indent">
+				<input id='showNumeric' type='checkbox' bind:checked={settings.showNumeric}/>
+				<label for='showNumeric'>showNumeric</label>
+			</div>
+
+			<div class="indent">
+				<input id='selectDimensions' type='checkbox' bind:checked={settings.selectDimensions}/>
+				<label for='selectDimensions'>selectDimensions</label>
+			</div>
+
+
+			{#each Object.keys(dimensions) as scale}
+				<div class="indent"><span class="dimension">{scale}</span>
+
+					{#each Object.keys(dimensions[scale]) as dim}
+						<div class="scale-dim">
+							<input id='showSliders-{scale}-{dim}' type='checkbox' bind:checked={settings.showSliders[`${scale}.${dim}`]}/>
+							<label for='showSliders-{scale}-{dim}'>{dim}</label>
+						</div>
+					{/each}
+				</div>
+			{/each}
+		{/if}
+		<div>
+			<input id='showLabels' type='checkbox' bind:checked={settings.showLabels}/>
+			<label for='showLabels'>showLabels</label>
+		</div>
+		<div>
+			<input id='showHex' type='checkbox' bind:checked={settings.showHex}/>
+			<label for='showHex'>showHex</label>
+		</div>
+		<div>
+			<label for='scrollbarHeight'>scroll</label>
+			<input id='scrollbarHeight' type='number' min=10 max=100 bind:value={settings.scrollbarHeight}/>
+		</div>
+
+	</div>
 </div>
-
 
 <style>
+	.layout {
+		display: flex;
+	}
+
+	.demo-container {
+		margin: 0 30px 30px 0;
+		flex-grow: 10;
+
+		text-align: center;
+
+	}
+
+	@media (max-width: 600px) {
+		.layout {
+			flex-direction: column;
+		}
+
+		.demo-container {
+			margin: 0 0 30px 0;
+		}
+	}
+
 	.demo {
 		background: #fff;
 		display: inline-block;
@@ -284,11 +311,13 @@
 	}
 
 	.settings-panel {
-		position: absolute;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		width: 300px;
+		flex-grow: 1;
+		min-width: 300px;
+		background: #eee;
+		border: 1px solid #ccc;
+		box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
+		border-radius: 5px;
+		padding: 20px;
 	}
 
 	.indent {
