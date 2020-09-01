@@ -17,7 +17,7 @@
 
 	export let selectedDimension = 'hsl.h'
 	export let selectedTab = 'hsl'
-	export let background = '#eeeeee'
+	export let background = '#fff'
 
 	export let collapse = false
 	export let tabbed = false

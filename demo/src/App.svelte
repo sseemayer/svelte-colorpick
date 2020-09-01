@@ -2,7 +2,7 @@
 	import { ColorPicker, dimensions, Color } from 'svelte-colorpick'
 
 	let color = Color.hex('#228800')
-	let background = '#eeeeee'
+	let background = '#fff'
 	let collapse = false
 
 	let settings;
@@ -177,10 +177,10 @@
 	$: {
 		if (color.isDark()) {
 			document.body.classList.remove('dark')
-			background = '#eeeeee'
+			background = '#fff'
 		} else {
 			document.body.classList.add('dark')
-			background = '#222222'
+			background = '#222'
 		}
 	}
 </script>
