@@ -3,6 +3,8 @@
 	import { onMount } from 'svelte'
 
 	import { getDimension } from './dimensions'
+	import { relativePosition } from './event'
+	import touchToMouse from './touch'
 
 	export let color = Color.hex('#00ff00')
 	export let dimensionX = 'hsl.l'
@@ -20,6 +22,7 @@
 
 	onMount(() => {
 		ctx = canvas.getContext('2d')
+		touchToMouse(canvas)
 	})
 
 	$: dimX = getDimension(dimensionX)
@@ -66,8 +69,9 @@
 
 	function onMouse(e) {
 		if (e.buttons === 1) {
-			let x = e.layerX - 1
-			let y = (cHeight - 1) - e.layerY
+			const pos = relativePosition(e)
+			let x = pos.relativeX
+			let y = (cHeight - 2) - pos.relativeY
 
 			let vX = (x / (cWidth - 2)) * (dimX.data.extent[1] - dimX.data.extent[0]) + dimX.data.extent[0]
 			if (vX > dimX.data.extent[1]) { vX = dimX.data.extent[1] }
