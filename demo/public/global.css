@@ -65,7 +65,7 @@ body.dark button {
 }
 
 body.dark input {
-	background-color: #000;	
+	background-color: #000;
 	color: #fff;
 }
 
@@ -98,6 +98,8 @@ pre {
 	padding: 10px;
 	background: #eee;
 	border-radius: 5px;
+
+	overflow-x: auto;
 }
 
 body.dark pre {
