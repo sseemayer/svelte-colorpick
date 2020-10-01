@@ -1,4 +1,6 @@
 <script>
+	import { createEventDispatcher } from 'svelte'
+
 	import Color from './color'
 	import { dimensions, getDimension } from './dimensions.js'
 
@@ -8,6 +10,8 @@
 	import HexInput from './HexInput.svelte'
 
 	export let color = Color.hex('#ff9900')
+
+	const dispatch = createEventDispatcher();
 
 	$: {
 			if (typeof color === 'string') {
@@ -61,17 +65,26 @@
 
 	$: sliderWidth = matrixWidth - (selectDimensions ? 25 : 0) - (showLabels ? 25 : 0) - (showNumeric ? 65 : 0)
 	$: textboxWidth = matrixWidth - (showLabels ? 50 : 0)
+
+	const expandPicker = () => {
+		collapsed = false
+		dispatch('pickerExpand', { collapsed, color })
+	}
+	const collapsePicker = () => {
+		collapsed = true
+		dispatch('pickerCollapse', { collapsed, color })
+	}
 </script>
 
 <div class='color-picker {collapse ? "collapse" : ""}'>
 
 
 	{#if collapse && !collapsed}
-		<div class='color-picker-background' on:click={() => collapsed = true}/>
+		<div class='color-picker-background' on:click={collapsePicker}/>
 	{/if}
 
 	{#if collapse}
-	<div class="color-picker-handle" style='width: {handleWidth}px; height: {handleHeight}px; background: {color.toHex()};' on:click={() => collapsed = false}></div>
+	<div class="color-picker-handle" style='width: {handleWidth}px; height: {handleHeight}px; background: {color.toHex()};' on:click={expandPicker}></div>
 	{/if}
 
 	<div class='color-picker-controls {collapse && collapsed ? "collapsed" : ""}' style="background: {background};">
