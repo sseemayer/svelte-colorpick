@@ -174,6 +174,14 @@
 
 	applyPreset('full')
 
+	function onPickerExpand (e) {
+		console.log('Picker Expand', e.detail)
+	}
+
+	function onPickerCollapse (e) {
+		console.log('Picker Collapse', e.detail)
+	}
+
 	$: {
 		if (color.isDark()) {
 			document.body.classList.remove('dark')
@@ -207,6 +215,9 @@
 					background={background}
 
 					collapse={collapse}
+					on:pickerExpand={onPickerExpand}
+					on:pickerCollapse={onPickerCollapse}
+
 					handleWidth={handleWidth}
 					handleHeight={handleHeight}
 
