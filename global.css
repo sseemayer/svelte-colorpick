@@ -1,0 +1,134 @@
+html, body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	color: #333;
+	background: #eee;
+	margin: 0;
+	padding: 8px;
+	box-sizing: border-box;
+	font-family: 'Lato', sans-serif;
+
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+body.dark {
+	color: #fff;
+	background: #000;
+}
+
+a {
+	color: rgb(0,100,200);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:visited {
+	color: rgb(0,80,160);
+}
+
+label {
+	display: block;
+}
+
+input, button, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	-webkit-padding: 0.4em 0;
+	padding: 0.4em;
+	margin: 0 0 0.5em 0;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+input:disabled {
+	color: #ccc;
+}
+
+button {
+	color: #333;
+	background-color: #f4f4f4;
+	outline: none;
+}
+
+body.dark button {
+	background-color: #444;
+	color: #fff;
+}
+
+body.dark input {
+	background-color: #000;
+	color: #fff;
+}
+
+button:disabled {
+	color: #999;
+}
+
+button:not(:disabled):active {
+	background-color: #ddd;
+}
+
+button:focus {
+	border-color: #666;
+}
+
+.layout {
+	display: flex;
+}
+
+.wrapper {
+	background: #fff;
+	padding: 40px;
+}
+
+body.dark .wrapper {
+	background: #111;
+}
+
+pre {
+	padding: 10px;
+	background: #eee;
+	border-radius: 5px;
+
+	overflow-x: auto;
+}
+
+body.dark pre {
+	background: #444;
+}
+
+.demo {
+	background: #fff;
+	display: inline-block;
+	box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
+	border-radius: 5px;
+	padding: 5px;
+	line-height: 0;
+}
+
+body.dark .demo {
+	background: #222;
+}
+
+.settings-panel {
+	flex-grow: 1;
+	min-width: 300px;
+	background: #eee;
+	box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
+	border-radius: 5px;
+	padding: 20px;
+}
+
+body.dark .settings-panel {
+	background: #222;
+}
+
