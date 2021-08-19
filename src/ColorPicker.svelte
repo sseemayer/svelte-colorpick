@@ -24,6 +24,7 @@
 	export let background = '#fff'
 
 	export let collapse = false
+	export let overlay = true
 	export let tabbed = false
 
 	export let handleWidth = 32
@@ -79,7 +80,7 @@
 <div class='color-picker {collapse ? "collapse" : ""}'>
 
 
-	{#if collapse && !collapsed}
+	{#if collapse && !collapsed && overlay}
 		<div class='color-picker-background' on:click={collapsePicker}/>
 	{/if}
 
