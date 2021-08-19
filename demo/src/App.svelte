@@ -4,6 +4,7 @@
 	let color = Color.hex('#228800')
 	let background = '#fff'
 	let collapse = false
+	let overlay = true
 
 	let settings;
 
@@ -215,6 +216,7 @@
 					background={background}
 
 					collapse={collapse}
+					overlay={overlay}
 					on:pickerExpand={onPickerExpand}
 					on:pickerCollapse={onPickerCollapse}
 
@@ -248,6 +250,8 @@
 				<label for='collapse'>collapse</label>
 				<input id='handleWidth' type='number' min=10 max=100 bind:value={handleWidth}/>x
 				<input id='handleHeight' type='number' min=10 max=100 bind:value={handleHeight}/>
+				<input id='overlay' type='checkbox' bind:checked={overlay}/>
+				<label for='overlay'>collapse</label>
 			</div>
 
 			<h3 style="color: {color.toHex()};">Presets</h3>
@@ -358,7 +362,7 @@
 	ul.links:before {
 		content: "> ";
 	}
-	
+
 	ul.links li {
 		display: inline-block;
 		padding: 3px 5px;
